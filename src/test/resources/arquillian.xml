@@ -5,6 +5,7 @@
 
     <container qualifier="jbossas7" default="true">
         <configuration>
+            <property name="javaVmArguments">-Xms64m -Xmx1024m -XX:MaxPermSize=512m</property>
             <property name="jbossHome">target/jboss-as-${jboss.version:7.1.0.Beta1}</property>
         </configuration>
     </container>
