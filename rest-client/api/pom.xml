@@ -8,13 +8,7 @@
         <version>1.0.0.Final-SNAPSHOT</version>
     </parent>
     <groupId>org.jboss.arquillian</groupId>
-    <artifactId>arquillian-rest-client-parent</artifactId>
-    <packaging>pom</packaging>
-    <name>Arquillian Extension: REST Client Parent</name>
-    <modules>
-        <module>api</module>
-        <module>impl/impl-base</module>
-        <module>impl/impl-2x</module>
-        <module>impl/impl-3x</module>
-    </modules>
+    <artifactId>arquillian-rest-client-api</artifactId>
+    <name>Arquillian Extension: REST Client API</name>
+    <description>Integrates a REST client API (using RestEasy Client Proxies) to facilitate testing REST endpoints</description>
 </project>
