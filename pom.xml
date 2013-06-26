@@ -35,7 +35,7 @@
         <version.arquillian_warp>1.0.0.Beta1-SNAPSHOT</version.arquillian_warp>
 
         <!-- JAX-RS implementations -->
-        <version.resteasy>2.3.4.Final</version.resteasy>
+        <version.resteasy>3.0.1.Final</version.resteasy>
         <version.jersey>1.17</version.jersey>
         <version.cxf>2.7.2</version.cxf>
         <version.springframework>3.2.1.RELEASE</version.springframework>
@@ -102,20 +102,6 @@
                 <type>pom</type>
             </dependency>
 
-            <dependency>
-                <groupId>org.jboss.arquillian.test</groupId>
-                <artifactId>arquillian-test-impl-base</artifactId>
-                <version>${version.arquillian_core}</version>
-                <classifier>tests</classifier>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss.arquillian.core</groupId>
-                <artifactId>arquillian-core-impl-base</artifactId>
-                <version>${version.arquillian_core}</version>
-                <classifier>tests</classifier>
-            </dependency>
-
             <!-- Resteasy dependencies -->
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
@@ -136,6 +122,12 @@
                 <artifactId>resteasy-jackson-provider</artifactId>
                 <version>${version.resteasy}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-client</artifactId>
+                <version>${version.resteasy}</version>
             </dependency>
 
             <dependency>
