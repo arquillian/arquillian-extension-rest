@@ -1,0 +1,1 @@
+org.jboss.arquillian.extension.rest.warp.impl.resteasy.client.WarpResteasyInterceptorEnricher
