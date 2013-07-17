@@ -31,8 +31,8 @@
     <properties>
         <!-- Arquillian -->
         <version.arquillian_core>1.0.4.Final</version.arquillian_core>
-        <version.arquillian_drone>1.1.0.CR3</version.arquillian_drone>
-        <version.arquillian_warp>1.0.0.Alpha3</version.arquillian_warp>
+        <version.arquillian_drone>1.1.0.Final</version.arquillian_drone>
+        <version.arquillian_warp>1.0.0.Beta1-SNAPSHOT</version.arquillian_warp>
 
         <!-- JAX-RS implementations -->
         <version.resteasy>2.3.4.Final</version.resteasy>
