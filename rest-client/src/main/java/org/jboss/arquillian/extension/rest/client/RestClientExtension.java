@@ -31,7 +31,6 @@ public class RestClientExtension implements LoadableExtension
    @Override
    public void register(ExtensionBuilder builder)
    {
-      builder.observer(RestInvoker.class);
       builder.service(TestEnricher.class, RestEnricher.class);
    }
 
