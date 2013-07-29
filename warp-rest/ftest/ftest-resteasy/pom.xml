@@ -37,6 +37,7 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -79,6 +80,7 @@
         <dependency>
             <groupId>org.easytesting</groupId>
             <artifactId>fest-assert</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

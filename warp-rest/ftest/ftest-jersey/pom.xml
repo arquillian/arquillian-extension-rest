@@ -36,21 +36,25 @@
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-server</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-servlet</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-json</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-client</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -74,6 +78,7 @@
         <dependency>
             <groupId>org.easytesting</groupId>
             <artifactId>fest-assert</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -92,7 +97,7 @@
                 <dependency>
                     <groupId>org.glassfish.main.extras</groupId>
                     <artifactId>glassfish-embedded-all</artifactId>
-                    <scope>provided</scope>
+                    <scope>test</scope>
                 </dependency>
             </dependencies>
         </profile>

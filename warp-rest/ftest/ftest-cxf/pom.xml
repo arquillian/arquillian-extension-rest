@@ -37,16 +37,19 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-rs-extension-providers</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.codehaus.jettison</groupId>
             <artifactId>jettison</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -70,6 +73,7 @@
         <dependency>
             <groupId>org.easytesting</groupId>
             <artifactId>fest-assert</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
@@ -89,7 +93,7 @@
                 <dependency>
                     <groupId>org.glassfish.main.extras</groupId>
                     <artifactId>glassfish-embedded-all</artifactId>
-                    <scope>provided</scope>
+                    <scope>test</scope>
                 </dependency>
             </dependencies>
         </profile>

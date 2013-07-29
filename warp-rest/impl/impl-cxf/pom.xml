@@ -52,50 +52,51 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-servlet_3.0_spec</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.easytesting</groupId>
             <artifactId>fest-assert</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.arquillian.core</groupId>
             <artifactId>arquillian-core-impl-base</artifactId>
+            <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.arquillian.test</groupId>
             <artifactId>arquillian-test-impl-base</artifactId>
-            <scope>tests</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.arquillian.core</groupId>
-            <artifactId>arquillian-core-impl-base</artifactId>
-            <classifier>tests</classifier>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.arquillian.test</groupId>
             <artifactId>arquillian-test-impl-base</artifactId>
             <classifier>tests</classifier>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
