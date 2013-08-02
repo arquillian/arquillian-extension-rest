@@ -172,7 +172,7 @@ final class JerseyContextBuilder implements RestContextBuilder {
             response.setContentType(getMediaTypeName(containerResponse.getMediaType()));
             response.setStatusCode(containerResponse.getStatus());
             response.setEntity(containerResponse.getEntity());
-            response.setHeaders(getHeaders(containerResponse.getHttpHeaders()));
+            response.setHeaders(containerResponse.getHttpHeaders());
         }
 
         return response;
@@ -218,26 +218,6 @@ final class JerseyContextBuilder implements RestContextBuilder {
     }
 
     /**
-     * Maps the headers object value map into simple string representation.
-     *
-     * @param httpHeaders the http headers map
-     *
-     * @return the result map
-     */
-    private MultivaluedMap<String, String> getHeaders(MultivaluedMap<String, Object> httpHeaders) {
-
-        if(httpHeaders == null) {
-            return null;
-        }
-
-        MultivaluedMap<String, String> result = new MultivaluedMapImpl<String, String>();
-        for (Map.Entry<String, List<Object>> entry : httpHeaders.entrySet()) {
-            result.put(entry.getKey(), getHttpValueList(entry.getValue()));
-        }
-        return result;
-    }
-
-    /**
      * Returns list of http headers values.
      *
      * @param values the list of values
@@ -260,16 +240,16 @@ final class JerseyContextBuilder implements RestContextBuilder {
      */
     private static JerseyContextBuilder getJerseyContextBuilder(ServletRequest servletRequest) {
 
-        JerseyContextBuilder resteasyContextBuilder = (JerseyContextBuilder)
+        JerseyContextBuilder jerseyContextBuilder = (JerseyContextBuilder)
                 servletRequest.getAttribute(BUILDER_ATTRIBUTE_NAME);
 
-        if(resteasyContextBuilder == null) {
+        if(jerseyContextBuilder == null) {
 
-            resteasyContextBuilder = new JerseyContextBuilder(servletRequest);
-            servletRequest.setAttribute(BUILDER_ATTRIBUTE_NAME, resteasyContextBuilder);
+            jerseyContextBuilder = new JerseyContextBuilder(servletRequest);
+            servletRequest.setAttribute(BUILDER_ATTRIBUTE_NAME, jerseyContextBuilder);
         }
 
-        return resteasyContextBuilder;
+        return jerseyContextBuilder;
     }
 
     /**

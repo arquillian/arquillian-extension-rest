@@ -64,7 +64,7 @@ public class WarpResteasyInterceptor implements PreProcessInterceptor, PostProce
     /**
      * Stores the security context withing the worker thread.
      */
-    private static final ThreadLocal<SecurityContext> securityContext = new InheritableThreadLocal<SecurityContext>();
+    private static final ThreadLocal<SecurityContext> securityContext = new ThreadLocal<SecurityContext>();
 
     /**
      * Sets the security context.

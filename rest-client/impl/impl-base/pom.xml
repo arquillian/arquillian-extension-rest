@@ -10,6 +10,9 @@
     <groupId>org.jboss.arquillian</groupId>
     <artifactId>arquillian-rest-client-impl-base</artifactId>
     <name>Arquillian Extension: REST Client impl base</name>
+    <properties>
+        <version.resteasy>2.3.4.Final</version.resteasy>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>javassist</groupId>
@@ -25,11 +28,13 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jackson-provider</artifactId>
+            <version>${version.resteasy}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxb-provider</artifactId>
+            <version>${version.resteasy}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

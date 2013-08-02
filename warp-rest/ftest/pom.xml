@@ -23,6 +23,7 @@
         <module>ftest-resteasy</module>
         <module>ftest-jersey</module>
         <module>ftest-cxf</module>
+        <module>ftest-jaxrs-2.0</module>
     </modules>
 
     <!-- Licenses -->

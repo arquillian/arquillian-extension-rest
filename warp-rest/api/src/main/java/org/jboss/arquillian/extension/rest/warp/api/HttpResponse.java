@@ -53,5 +53,5 @@ public interface HttpResponse {
      *
      * @return the request http headers
      */
-    MultivaluedMap<String, String> getHeaders();
+    MultivaluedMap<String, Object> getHeaders();
 }

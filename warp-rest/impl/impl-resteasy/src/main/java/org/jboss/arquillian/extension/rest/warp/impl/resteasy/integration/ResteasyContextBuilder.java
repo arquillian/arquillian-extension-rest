@@ -33,10 +33,8 @@ import org.jboss.arquillian.extension.rest.warp.spi.WarpRestCommons;
 import org.jboss.resteasy.core.ServerResponse;
 
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * The RestEasy specific {@link RestContext} builder.
@@ -204,7 +202,7 @@ final class ResteasyContextBuilder implements RestContextBuilder {
             response.setContentType(getMediaTypeName(responseMediaType));
             response.setStatusCode(serverResponse.getStatus());
             response.setEntity(serverResponse.getEntity());
-            response.setHeaders(getHeaders(serverResponse.getMetadata()));
+            response.setHeaders(serverResponse.getMetadata());
         }
         return response;
     }
@@ -217,7 +215,7 @@ final class ResteasyContextBuilder implements RestContextBuilder {
     private SecurityContext buildSecurityContext() {
 
         SecurityContextImpl securityContext = new SecurityContextImpl();
-        if(this.securityContext != null) {
+        if (this.securityContext != null) {
             securityContext.setPrincipal(this.securityContext.getUserPrincipal());
             securityContext.setAuthenticationScheme(this.securityContext.getAuthenticationScheme());
         }
@@ -249,26 +247,6 @@ final class ResteasyContextBuilder implements RestContextBuilder {
     }
 
     /**
-     * Maps the headers object value map into simple string representation.
-     *
-     * @param httpHeaders the http headers map
-     *
-     * @return the result map
-     */
-    private MultivaluedMap<String, String> getHeaders(MultivaluedMap<String, Object> httpHeaders) {
-
-        if(httpHeaders == null) {
-            return null;
-        }
-
-        MultivaluedMap<String, String> result = new MultivaluedMapImpl<String, String>();
-        for (Map.Entry<String, List<Object>> entry : httpHeaders.entrySet()) {
-            result.put(entry.getKey(), getHttpValueList(entry.getValue()));
-        }
-        return result;
-    }
-
-    /**
      * Returns list of http headers values.
      *
      * @param values the list of values
@@ -294,7 +272,7 @@ final class ResteasyContextBuilder implements RestContextBuilder {
         ResteasyContextBuilder resteasyContextBuilder = (ResteasyContextBuilder)
                 httpRequest.getAttribute(BUILDER_ATTRIBUTE_NAME);
 
-        if(resteasyContextBuilder == null) {
+        if (resteasyContextBuilder == null) {
 
             resteasyContextBuilder = new ResteasyContextBuilder(httpRequest);
             httpRequest.setAttribute(BUILDER_ATTRIBUTE_NAME, resteasyContextBuilder);

@@ -1,0 +1,1 @@
+org.jboss.arquillian.extension.rest.warp.impl.jaxrs2.client.WarpJaxrs2InterceptorEnricher
