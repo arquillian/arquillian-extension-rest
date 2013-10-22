@@ -205,7 +205,7 @@ final class CxfContextBuilder implements RestContextBuilder {
             response.setContentType((String) responseMessage.get(Message.CONTENT_TYPE));
             response.setStatusCode(this.response.getStatus());
             response.setEntity(this.response.getEntity());
-            response.setHeaders(getHeaders((Map<String, List<String>>)
+            response.setHeaders(getHeaders((Map<String, List<Object>>)
                     this.responseMessage.get(Message.PROTOCOL_HEADERS)));
         }
 
@@ -256,33 +256,20 @@ final class CxfContextBuilder implements RestContextBuilder {
      *
      * @param httpHeaders the http headers map
      *
+     * @param <TKey> the key type
+     * @param <TVal> the value type
+     *
      * @return the result map
      */
-    private MultivaluedMap<String, String> getHeaders(Map<String, List<String>> httpHeaders) {
+    private <TKey, TVal> MultivaluedMap<TKey, TVal> getHeaders(Map<TKey, List<TVal>> httpHeaders) {
 
         if(httpHeaders == null) {
             return null;
         }
 
-        MultivaluedMap<String, String> result = new MultivaluedMapImpl<String, String>();
-        for (Map.Entry<String, List<String>> entry : httpHeaders.entrySet()) {
-            result.put(entry.getKey(), getHeaderValueList(entry.getValue()));
-        }
-        return result;
-    }
-
-    /**
-     * Returns list of http headers values.
-     *
-     * @param values the list of values
-     *
-     * @return the list of values
-     */
-    private List<String> getHeaderValueList(List<String> values) {
-
-        List<String> result = new ArrayList<String>();
-        for (String val : values) {
-            result.add(val);
+        MultivaluedMap<TKey, TVal> result = new MultivaluedMapImpl<TKey, TVal>();
+        for (Map.Entry<TKey, List<TVal>> entry : httpHeaders.entrySet()) {
+            result.put(entry.getKey(), entry.getValue());
         }
         return result;
     }

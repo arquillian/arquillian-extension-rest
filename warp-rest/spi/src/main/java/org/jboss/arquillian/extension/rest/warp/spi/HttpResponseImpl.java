@@ -46,7 +46,7 @@ public class HttpResponseImpl implements HttpResponse {
     /**
      * Represents the http headers.
      */
-    private MultivaluedMap<String, String> headers;
+    private MultivaluedMap<String, Object> headers;
 
     /**
      * Creates new instance of {@link HttpResponseImpl} class.
@@ -110,7 +110,7 @@ public class HttpResponseImpl implements HttpResponse {
      * {@inheritDoc}
      */
     @Override
-    public MultivaluedMap<String, String> getHeaders() {
+    public MultivaluedMap<String, Object> getHeaders() {
         return headers;
     }
 
@@ -119,7 +119,7 @@ public class HttpResponseImpl implements HttpResponse {
      *
      * @param headers the http headers
      */
-    public void setHeaders(MultivaluedMap<String, String> headers) {
+    public void setHeaders(MultivaluedMap<String, Object> headers) {
         this.headers = headers;
     }
 }

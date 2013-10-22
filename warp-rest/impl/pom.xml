@@ -24,6 +24,7 @@
         <module>impl-resteasy</module>
         <module>impl-jersey</module>
         <module>impl-cxf</module>
+        <module>impl-jaxrs-2.0</module>
     </modules>
 
     <!-- Licenses -->
