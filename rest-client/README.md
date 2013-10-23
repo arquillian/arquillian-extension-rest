@@ -129,13 +129,13 @@ Here are dependencies for Arquillian REST Client Extension if you choose RestEas
     <dependency>
         <groupId>org.jboss.arquillian.extension</groupId>
         <artifactId>arquillian-rest-client-api</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0.Final-SNAPSHOT</version>
         <scope>test</scope>
     </dependency>
     <dependency>
         <groupId>org.jboss.arquillian.extension</groupId>
         <artifactId>arquillian-rest-client-impl-3x</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0.Final-SNAPSHOT</version>
         <scope>test</scope>
     </dependency>
 
