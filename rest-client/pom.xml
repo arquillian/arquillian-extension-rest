@@ -9,7 +9,7 @@
     </parent>
     <artifactId>arquillian-rest-client-parent</artifactId>
     <packaging>pom</packaging>
-    <name>Arquillian Extension: REST Client Parent</name>
+    <name>Arquillian REST Client Extension: Parent</name>
     <modules>
         <module>api</module>
         <module>impl/impl-base</module>

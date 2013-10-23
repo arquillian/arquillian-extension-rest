@@ -8,7 +8,7 @@
         <version>1.0.0.Final-SNAPSHOT</version>
     </parent>
     <artifactId>arquillian-rest-client-impl-3x</artifactId>
-    <name>Arquillian Extension: REST Client impl 3x</name>
+    <name>Arquillian REST Client Extension: Implementation 3x</name>
     <description>Integrates RestEasy Client version 3.x with Arquillian</description>
     <properties>
         <version.resteasy>3.0.0.Final</version.resteasy>

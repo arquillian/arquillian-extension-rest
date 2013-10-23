@@ -8,7 +8,7 @@
         <version>1.0.0.Final-SNAPSHOT</version>
     </parent>
     <artifactId>arquillian-rest-client-impl-base</artifactId>
-    <name>Arquillian Extension: REST Client impl base</name>
+    <name>Arquillian REST Client Extension: Implementation base</name>
     <properties>
         <version.resteasy>2.3.4.Final</version.resteasy>
     </properties>

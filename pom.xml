@@ -18,7 +18,7 @@
     <version>1.0.0.Final-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Arquillian Extension: REST Parent</name>
+    <name>Arquillian REST Extension: Parent</name>
     <description>Parent project for the Arquillian REST extensions.</description>
 
     <licenses>
