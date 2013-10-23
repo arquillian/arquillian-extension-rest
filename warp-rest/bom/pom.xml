@@ -7,7 +7,7 @@
     <!-- Artifact Configuration -->
     <groupId>org.jboss.arquillian.extension</groupId>
     <artifactId>arquillian-rest-warp-bom</artifactId>
-    <version>1.0.0.Alpha1</version>
+    <version>1.0.0.Final-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Arquillian Warp REST Extension: BOM</name>
     <url>http://arquillian.org</url>
