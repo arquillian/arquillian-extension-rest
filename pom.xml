@@ -14,7 +14,7 @@
 
     <!-- Artifact Configuration -->
     <groupId>org.jboss.arquillian.extension</groupId>
-    <artifactId>arquillian-extension-rest-parent</artifactId>
+    <artifactId>arquillian-rest-parent</artifactId>
     <version>1.0.0.Final-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -27,6 +27,21 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
+
+    <scm>
+        <connection>scm:git:git://git@github.com:arquillian/arquillian-extension-rest.git</connection>
+        <developerConnection>scm:git:ssh://github.com/arquillian/arquillian-extension-rest.git</developerConnection>
+        <url>git://github.com/arquillian/arquillian-extension-rest.git</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>arquillian.org</id>
+            <name>Arquillian Community</name>
+            <organization>arquillian.org</organization>
+            <organizationUrl>http://arquillian.org</organizationUrl>
+        </developer>
+    </developers>
 
     <properties>
         <!-- Arquillian -->
@@ -108,6 +123,7 @@
                 <artifactId>arquillian-test-impl-base</artifactId>
                 <version>${version.arquillian_core}</version>
                 <classifier>tests</classifier>
+                <scope>test</scope>
             </dependency>
 
             <dependency>
@@ -115,6 +131,7 @@
                 <artifactId>arquillian-core-impl-base</artifactId>
                 <version>${version.arquillian_core}</version>
                 <classifier>tests</classifier>
+                <scope>test</scope>
             </dependency>
 
             <!-- Jersey dependencies -->
@@ -262,20 +279,6 @@
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-all</artifactId>
                 <version>${version.mockito}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss.arquillian.core</groupId>
-                <artifactId>arquillian-core-impl-base</artifactId>
-                <classifier>tests</classifier>
-                <version>${version.arquillian_core}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss.arquillian.test</groupId>
-                <artifactId>arquillian-test-impl-base</artifactId>
-                <classifier>tests</classifier>
-                <version>${version.arquillian_core}</version>
             </dependency>
 
             <dependency>

@@ -7,6 +7,7 @@
         <groupId>org.jboss.arquillian.extension</groupId>
         <artifactId>arquillian-rest-warp-impl-parent</artifactId>
         <version>1.0.0.Final-SNAPSHOT</version>
+        <relativePath>../</relativePath>
     </parent>
 
     <!-- Model Version -->
@@ -99,7 +100,7 @@
         <dependency>
             <groupId>org.jboss.arquillian.test</groupId>
             <artifactId>arquillian-test-impl-base</artifactId>
-            <scope>tests</scope>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

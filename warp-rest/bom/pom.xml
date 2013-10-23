@@ -26,6 +26,12 @@
         </license>
     </licenses>
 
+    <scm>
+        <connection>scm:git:git://git@github.com:arquillian/arquillian-extension-rest.git</connection>
+        <developerConnection>scm:git:ssh://github.com/arquillian/arquillian-extension-rest.git</developerConnection>
+        <url>git://github.com/arquillian/arquillian-extension-rest.git</url>
+    </scm>
+
     <developers>
         <developer>
             <id>arquillian.org</id>
