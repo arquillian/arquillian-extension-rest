@@ -7,7 +7,6 @@
         <groupId>org.jboss.arquillian.extension</groupId>
         <version>1.0.0.Final-SNAPSHOT</version>
     </parent>
-    <groupId>org.jboss.arquillian</groupId>
     <artifactId>arquillian-rest-client-impl-3x</artifactId>
     <name>Arquillian Extension: REST Client impl 3x</name>
     <description>Integrates RestEasy Client version 3.x with Arquillian</description>

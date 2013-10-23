@@ -7,7 +7,6 @@
         <groupId>org.jboss.arquillian.extension</groupId>
         <version>1.0.0.Final-SNAPSHOT</version>
     </parent>
-    <groupId>org.jboss.arquillian</groupId>
     <artifactId>arquillian-rest-client-api</artifactId>
     <name>Arquillian Extension: REST Client API</name>
     <description>Integrates a REST client API (using RestEasy Client Proxies) to facilitate testing REST endpoints</description>

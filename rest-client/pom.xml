@@ -7,7 +7,6 @@
         <groupId>org.jboss.arquillian.extension</groupId>
         <version>1.0.0.Final-SNAPSHOT</version>
     </parent>
-    <groupId>org.jboss.arquillian</groupId>
     <artifactId>arquillian-rest-client-parent</artifactId>
     <packaging>pom</packaging>
     <name>Arquillian Extension: REST Client Parent</name>
