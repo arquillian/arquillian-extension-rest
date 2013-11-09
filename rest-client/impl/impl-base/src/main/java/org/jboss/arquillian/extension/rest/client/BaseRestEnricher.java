@@ -35,7 +35,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public abstract class BaseEnricher implements TestEnricher {
+public abstract class BaseRestEnricher implements TestEnricher {
     @Inject
     private Instance<ProtocolMetaData> metaDataInst;
 

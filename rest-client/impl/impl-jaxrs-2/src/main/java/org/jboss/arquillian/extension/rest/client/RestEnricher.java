@@ -17,11 +17,6 @@
  */
 package org.jboss.arquillian.extension.rest.client;
 
-import org.jboss.arquillian.container.spi.client.protocol.metadata.HTTPContext;
-import org.jboss.arquillian.container.spi.client.protocol.metadata.ProtocolMetaData;
-import org.jboss.arquillian.container.spi.client.protocol.metadata.Servlet;
-import org.jboss.arquillian.core.api.Instance;
-import org.jboss.arquillian.core.api.annotation.Inject;
 import org.jboss.arquillian.test.spi.TestEnricher;
 
 import javax.ws.rs.Consumes;
@@ -29,13 +24,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Response;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.net.URI;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * RestEnricher
@@ -45,7 +34,7 @@ import java.util.Set;
  * @author <a href="johndament@apache.org">John D. Ament</a>
  * @version $Revision: $
  */
-public class RestEnricher extends BaseEnricher implements TestEnricher {
+public class RestEnricher extends BaseRestEnricher implements TestEnricher {
 
     @Override
     protected boolean isSupportedParameter(Class<?> clazz) {
