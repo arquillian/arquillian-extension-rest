@@ -15,6 +15,7 @@
         <module>impl/impl-base</module>
         <module>impl/impl-2x</module>
         <module>impl/impl-3x</module>
+        <module>impl/impl-jaxrs-2</module>
         <module>ftest/ftest-impl-2x</module>
         <module>ftest/ftest-impl-3x</module>
     </modules>
