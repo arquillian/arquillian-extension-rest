@@ -45,73 +45,39 @@ import java.util.Set;
  * @author <a href="johndament@apache.org">John D. Ament</a>
  * @version $Revision: $
  */
-public class RestEnricher implements TestEnricher {
-
-    @Inject
-    private Instance<ProtocolMetaData> metaDataInst;
-
-    @Inject
-    private Instance<Response> responseInst;
+public class RestEnricher extends BaseEnricher implements TestEnricher {
 
     @Override
-    public void enrich(Object testCase)
-    {
+    protected boolean isSupportedParameter(Class<?> clazz) {
+        if(ClientBuilder.class.isAssignableFrom(clazz)) {
+            return true;
+        }
+        else if(Client.class.isAssignableFrom(clazz)) {
+            return true;
+        }
+        else if(WebTarget.class.isAssignableFrom(clazz)) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Override
-    public Object[] resolve(Method method)
-    {
-        Object[] values = new Object[method.getParameterTypes().length];
-        Class<?>[] parameterTypes = method.getParameterTypes();
-        if (responseInst.get() != null) {
-            for (int i = 0; i < parameterTypes.length; i++) {
-                if (Response.class.isAssignableFrom(parameterTypes[i])) {
-                    values[i] = responseInst.get();
-                }
-            }
-        } else {
-            for (int i = 0; i < parameterTypes.length; i++) {
-                final Annotation[] parameterAnnotations = method.getParameterAnnotations()[i];
-                for (Annotation annotation : parameterAnnotations) {
-                    if (annotation instanceof ArquillianResteasyResource) {
-                        Class<?> clazz = parameterTypes[i];
-                        if(ClientBuilder.class.isAssignableFrom(clazz)) {
-                            values[i] = ClientBuilder.newBuilder();
-                        }
-                        else if(Client.class.isAssignableFrom(clazz)) {
-                            values[i] = ClientBuilder.newClient();
-                        }
-                        else if(WebTarget.class.isAssignableFrom(clazz)) {
-                            WebTarget webTarget = ClientBuilder.newClient()
-                                    .target(getBaseURL() + ((ArquillianResteasyResource) annotation).value());
-                            values[i] = webTarget;
-                        }
-                        else {
-                            throw new RuntimeException("Not able to provide a client injection for type "+clazz);
-                        }
-                    }
-                }
-            }
+    protected Object enrichByType(Class<?> clazz,Method method, ArquillianResteasyResource annotation,
+                                  Consumes consumes, Produces produces) {
+        Object result = null;
+        if(ClientBuilder.class.isAssignableFrom(clazz)) {
+            result = ClientBuilder.newBuilder();
         }
-        return values;
-    }
-
-    private boolean allInSameContext(List<Servlet> servlets)
-    {
-        Set<String> context = new HashSet<String>();
-        for (Servlet servlet : servlets) {
-            context.add(servlet.getContextRoot());
+        else if(Client.class.isAssignableFrom(clazz)) {
+            result = ClientBuilder.newClient();
         }
-        return context.size() == 1;
-    }
-
-    // Currently no way to share @ArquillianResource URL (URLResourceProvider) logic internally, copied logic
-    private URI getBaseURL()
-    {
-        HTTPContext context = metaDataInst.get().getContext(HTTPContext.class);
-        if (allInSameContext(context.getServlets())) {
-            return context.getServlets().get(0).getBaseURI();
+        else if(WebTarget.class.isAssignableFrom(clazz)) {
+            WebTarget webTarget = ClientBuilder.newClient()
+                    .target(getBaseURL() + annotation.value());
+            result = webTarget;
         }
-        throw new IllegalStateException("No baseURL found in HTTPContext");
+        return result;
     }
 }
