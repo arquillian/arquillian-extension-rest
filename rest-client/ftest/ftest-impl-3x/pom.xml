@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.jboss.arquillian.extension</groupId>
         <artifactId>arquillian-rest-parent</artifactId>
-        <version>1.0.0.Final-SNAPSHOT</version>
+        <version>1.0.0.Alpha2</version>
         <relativePath>../../../</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
