@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.jboss.arquillian.extension</groupId>
         <artifactId>arquillian-rest-parent</artifactId>
-        <version>1.0.0.Alpha2</version>
+        <version>1.0.0.Final-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
     <artifactId>arquillian-rest-client-parent</artifactId>
