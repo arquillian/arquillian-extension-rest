@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.jboss.arquillian.extension</groupId>
@@ -16,7 +17,9 @@
         <module>impl/impl-2x</module>
         <module>impl/impl-3x</module>
         <module>impl/impl-jaxrs-2</module>
+        <module>impl/impl-jersey</module>
         <module>ftest/ftest-impl-2x</module>
         <module>ftest/ftest-impl-3x</module>
+        <module>ftest/ftest-impl-jersey</module>
     </modules>
 </project>
