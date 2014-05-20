@@ -156,7 +156,7 @@ public class RestClientTestCase {
      * @param webTarget configured resource ready for use, injected by Arquillian
      */
     @Test
-    public void createPackageBareRsource(@ArquillianResteasyResource("rest/customer/create") JerseyWebTarget webTarget)
+    public void createPackageBareRsource(@ArquillianResteasyResource("rest/customer") JerseyWebTarget webTarget)
     {
         //        Given
         final Invocation.Builder invocationBuilder = webTarget.request();
@@ -167,7 +167,7 @@ public class RestClientTestCase {
         final Response response = invocation.invoke();
 
         //        Then
-        assertEquals(deploymentURL + "rest/customer/create", webTarget.getUri().toASCIIString());
+        assertEquals(deploymentURL + "rest/customer", webTarget.getUri().toASCIIString());
         assertEquals(MediaType.APPLICATION_JSON, response.getMediaType().toString());
         assertEquals(200, response.getStatus());
     }

@@ -43,6 +43,5 @@ public interface CustomerResource {
     @POST
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Path("/create")
     Customer createCustomer(Customer customer);
 }
