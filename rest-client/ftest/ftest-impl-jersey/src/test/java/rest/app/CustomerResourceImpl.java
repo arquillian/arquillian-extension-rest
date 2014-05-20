@@ -19,7 +19,6 @@ package rest.app;
 
 import rest.app.model.Customer;
 
-import javax.ws.rs.PathParam;
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class CustomerResourceImpl implements CustomerResource {
      * <a class="citation" href= "javacode://com.acme.jaxrs.CustomerResource#getCustomerById(long)" />
      */
     @Override
-    public Customer getCustomerById(@PathParam("id") long id)
+    public Customer getCustomerById(long id)
     {
         System.out.println("Handling resource request for /customer/" + id);
         return findCustomerById(id);
