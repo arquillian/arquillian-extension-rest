@@ -86,25 +86,21 @@
                 <dependency>
                     <groupId>org.apache.tomcat.embed</groupId>
                     <artifactId>tomcat-embed-core</artifactId>
-                    <version>7.0.42</version>
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.apache.tomcat.embed</groupId>
                     <artifactId>tomcat-embed-jasper</artifactId>
-                    <version>7.0.42</version>
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.apache.tomcat.embed</groupId>
                     <artifactId>tomcat-embed-logging-juli</artifactId>
-                    <version>7.0.42</version>
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.jboss.arquillian.container</groupId>
                     <artifactId>arquillian-tomcat-embedded-7</artifactId>
-                    <version>1.0.0.CR5</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
@@ -156,62 +152,62 @@
                                         <artifactItem>
                                             <artifactId>jersey-server</artifactId>
                                             <groupId>org.glassfish.jersey.core</groupId>
-                                            <version>2.8</version>
+                                            <version>${version.jersey}</version>
                                         </artifactItem>
                                         <artifactItem>
                                             <artifactId>jersey-client</artifactId>
                                             <groupId>org.glassfish.jersey.core</groupId>
-                                            <version>2.8</version>
+                                            <version>${version.jersey}</version>
                                         </artifactItem>
                                         <artifactItem>
                                             <artifactId>jackson-jaxrs-json-provider</artifactId>
                                             <groupId>com.fasterxml.jackson.jaxrs</groupId>
-                                            <version>2.3.0</version>
+                                            <version>${version.jersey.providers}</version>
                                         </artifactItem>
                                         <artifactItem>
                                             <artifactId>jackson-jaxrs-base</artifactId>
                                             <groupId>com.fasterxml.jackson.jaxrs</groupId>
-                                            <version>2.3.0</version>
+                                            <version>${version.jersey.providers}</version>
                                         </artifactItem>
                                         <artifactItem>
                                             <artifactId>jackson-core</artifactId>
                                             <groupId>com.fasterxml.jackson.core</groupId>
-                                            <version>2.3.0</version>
+                                            <version>${version.jersey.providers}</version>
                                         </artifactItem>
                                         <artifactItem>
                                             <artifactId>jackson-databind</artifactId>
                                             <groupId>com.fasterxml.jackson.core</groupId>
-                                            <version>2.3.0</version>
+                                            <version>${version.jersey.providers}</version>
                                         </artifactItem>
                                         <artifactItem>
                                             <artifactId>jackson-annotations</artifactId>
                                             <groupId>com.fasterxml.jackson.core</groupId>
-                                            <version>2.3.0</version>
+                                            <version>${version.jersey.providers}</version>
                                         </artifactItem>
                                         <artifactItem>
                                             <artifactId>jackson-module-jaxb-annotations</artifactId>
                                             <groupId>com.fasterxml.jackson.module</groupId>
-                                            <version>2.3.0</version>
+                                            <version>${version.jersey.providers}</version>
                                         </artifactItem>
                                         <artifactItem>
                                             <artifactId>jersey-container-servlet</artifactId>
                                             <groupId>org.glassfish.jersey.containers</groupId>
-                                            <version>2.8</version>
+                                            <version>${version.jersey}</version>
                                         </artifactItem>
                                         <artifactItem>
                                             <artifactId>jersey-container-servlet-core</artifactId>
                                             <groupId>org.glassfish.jersey.containers</groupId>
-                                            <version>2.8</version>
+                                            <version>${version.jersey}</version>
                                         </artifactItem>
                                         <artifactItem>
                                             <artifactId>jersey-common</artifactId>
                                             <groupId>org.glassfish.jersey.core</groupId>
-                                            <version>2.8</version>
+                                            <version>${version.jersey}</version>
                                         </artifactItem>
                                         <artifactItem>
                                             <artifactId>jersey-guava</artifactId>
                                             <groupId>org.glassfish.jersey.bundles.repackaged</groupId>
-                                            <version>2.8</version>
+                                            <version>${version.jersey}</version>
                                         </artifactItem>
                                         <artifactItem>
                                             <artifactId>javax.inject</artifactId>
@@ -313,7 +309,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.jaxrs</groupId>
             <artifactId>jackson-jaxrs-json-provider</artifactId>
-            <version>2.3.0</version>
+            <version>${version.jersey.providers}</version>
         </dependency>
         <dependency>
             <groupId>javax.ws.rs</groupId>
@@ -323,7 +319,7 @@
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet</artifactId>
-            <version>2.8</version>
+            <version>${version.jersey}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -366,6 +362,8 @@
     </dependencies>
     <properties>
         <jboss.version>7.1.1.Final</jboss.version>
+        <version.jersey>2.8</version.jersey>
+        <version.jersey.providers>2.3.0</version.jersey.providers>
         <version.org.jboss.jbossas>7.1.1.Final</version.org.jboss.jbossas>
         <version.resteasy>3.0.1.Final</version.resteasy>
     </properties>
