@@ -10,7 +10,13 @@
 
     <container qualifier="tomcat">
         <configuration>
-            <property name="unpackArchive">true</property>
+            <property name="catalinaHome">${CATALINA_HOME:target/apache-tomcat-7.0.20}</property>
+            <property name="javaVmArguments">-Xmx1024m -XX:MaxPermSize=512m</property>
+            <property name="jmxPort">8089</property>
+            <property name="bindHttpPort">8080</property>
+            <property name="user">tomcat</property>
+            <property name="pass">tomcat</property>
+            <property name="serverConfig">server.xml</property>
         </configuration>
     </container>
 

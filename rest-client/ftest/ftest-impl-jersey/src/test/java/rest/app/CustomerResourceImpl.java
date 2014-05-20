@@ -43,7 +43,7 @@ public class CustomerResourceImpl implements CustomerResource {
      * format. The id value is taken from the final path segment.
      * </p>
      * <p/>
-     * <a class="citation" href= "javacode://com.acme.jaxrs.CustomerResource#getCustomerById(java.lang.String)" />
+     * <a class="citation" href= "javacode://com.acme.jaxrs.CustomerResource#getCustomerById(long)" />
      */
     @Override
     public Customer getCustomerById(@PathParam("id") long id)

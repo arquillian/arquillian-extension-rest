@@ -84,12 +84,229 @@
             </build>
             <dependencies>
                 <dependency>
+                    <groupId>org.apache.tomcat.embed</groupId>
+                    <artifactId>tomcat-embed-core</artifactId>
+                    <version>7.0.42</version>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat.embed</groupId>
+                    <artifactId>tomcat-embed-jasper</artifactId>
+                    <version>7.0.42</version>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat.embed</groupId>
+                    <artifactId>tomcat-embed-logging-juli</artifactId>
+                    <version>7.0.42</version>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
                     <groupId>org.jboss.arquillian.container</groupId>
                     <artifactId>arquillian-tomcat-embedded-7</artifactId>
                     <version>1.0.0.CR5</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
+        </profile>
+        <profile>
+            <id>tomcat-managed</id>
+            <build>
+                <testResources>
+                    <testResource>
+                        <directory>src/test/resources</directory>
+                    </testResource>
+                    <testResource>
+                        <directory>src/test/resources-jersey</directory>
+                    </testResource>
+                </testResources>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>generate-test-resources</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <tasks>
+                                        <!-- Remove the default ROOT webapp so it won't collide with tests -->
+                                        <delete dir="${project.build.directory}/apache-tomcat-${version.org.apache.tomcat}/webapps/ROOT"/>
+                                        <get src="http://archive.apache.org/dist/tomcat/tomcat-7/v${version.org.apache.tomcat}/bin/apache-tomcat-${version.org.apache.tomcat}.zip"
+                                             dest="${project.build.directory}/downloads" verbose="true" skipexisting="true"/>
+                                        <mkdir dir="${project.build.directory}/downloads"/>
+                                        <unzip src="${project.build.directory}/downloads/apache-tomcat-${version.org.apache.tomcat}.zip"
+                                               dest="${project.build.directory}"/>
+                                    </tasks>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>process-test-resources</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <artifactId>jersey-server</artifactId>
+                                            <groupId>org.glassfish.jersey.core</groupId>
+                                            <version>2.8</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>jersey-client</artifactId>
+                                            <groupId>org.glassfish.jersey.core</groupId>
+                                            <version>2.8</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>jackson-jaxrs-json-provider</artifactId>
+                                            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+                                            <version>2.3.0</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>jackson-jaxrs-base</artifactId>
+                                            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+                                            <version>2.3.0</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>jackson-core</artifactId>
+                                            <groupId>com.fasterxml.jackson.core</groupId>
+                                            <version>2.3.0</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>jackson-databind</artifactId>
+                                            <groupId>com.fasterxml.jackson.core</groupId>
+                                            <version>2.3.0</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>jackson-annotations</artifactId>
+                                            <groupId>com.fasterxml.jackson.core</groupId>
+                                            <version>2.3.0</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>jackson-module-jaxb-annotations</artifactId>
+                                            <groupId>com.fasterxml.jackson.module</groupId>
+                                            <version>2.3.0</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>jersey-container-servlet</artifactId>
+                                            <groupId>org.glassfish.jersey.containers</groupId>
+                                            <version>2.8</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>jersey-container-servlet-core</artifactId>
+                                            <groupId>org.glassfish.jersey.containers</groupId>
+                                            <version>2.8</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>jersey-common</artifactId>
+                                            <groupId>org.glassfish.jersey.core</groupId>
+                                            <version>2.8</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>jersey-guava</artifactId>
+                                            <groupId>org.glassfish.jersey.bundles.repackaged</groupId>
+                                            <version>2.8</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>javax.inject</artifactId>
+                                            <groupId>org.glassfish.hk2.external</groupId>
+                                            <version>2.2.0</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>hk2-api</artifactId>
+                                            <groupId>org.glassfish.hk2</groupId>
+                                            <version>2.2.0</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>hk2-locator</artifactId>
+                                            <groupId>org.glassfish.hk2</groupId>
+                                            <version>2.2.0</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>hk2-utils</artifactId>
+                                            <groupId>org.glassfish.hk2</groupId>
+                                            <version>2.2.0</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>javassist</artifactId>
+                                            <groupId>org.javassist</groupId>
+                                            <version>3.18.1-GA</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>javax.ws.rs-api</artifactId>
+                                            <groupId>javax.ws.rs</groupId>
+                                            <version>2.0</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>javax.annotation-api</artifactId>
+                                            <groupId>javax.annotation</groupId>
+                                            <version>1.2</version>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <artifactId>validation-api</artifactId>
+                                            <groupId>javax.validation</groupId>
+                                            <version>1.1.0.Final</version>
+                                        </artifactItem>
+                                    </artifactItems>
+                                    <outputDirectory>${tomcat.home}/lib</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-resources</id>
+                                <phase>process-test-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${tomcat.home}/conf</outputDirectory>
+                                    <overwrite>true</overwrite>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/src/test/resources/container</directory>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <!-- Workaround for SHRINKDESC-97 until it is fixed. -->
+                            <argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
+                            <environmentVariables>
+                                <CATALINA_HOME>${tomcat.home}</CATALINA_HOME>
+                            </environmentVariables>
+                            <systemPropertyVariables>
+                                <arquillian.launch>tomcat</arquillian.launch>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.arquillian.container</groupId>
+                    <artifactId>arquillian-tomcat-managed-7</artifactId>
+                    <version>1.0.0.CR6</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+            <properties>
+                <tomcat.home>${project.build.directory}/apache-tomcat-${version.org.apache.tomcat}</tomcat.home>
+                <version.org.apache.tomcat>7.0.20</version.org.apache.tomcat>
+            </properties>
         </profile>
     </profiles>
     <dependencies>
@@ -98,51 +315,20 @@
             <artifactId>jackson-jaxrs-json-provider</artifactId>
             <version>2.3.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.jaxrs</groupId>
-            <artifactId>jackson-jaxrs-xml-provider</artifactId>
-            <version>2.3.0</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>com.fasterxml.jackson.jaxrs</groupId>-->
+        <!--<artifactId>jackson-jaxrs-xml-provider</artifactId>-->
+        <!--<version>2.3.0</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
             <version>2.0</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-core</artifactId>
-            <version>7.0.42</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-jasper</artifactId>
-            <version>7.0.42</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-logging-juli</artifactId>
-            <version>7.0.42</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet</artifactId>
             <version>2.8</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-server</artifactId>
-            <version>2.8</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.ext</groupId>
-            <artifactId>jersey-proxy-client</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -165,6 +351,16 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.ext</groupId>
+            <artifactId>jersey-proxy-client</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

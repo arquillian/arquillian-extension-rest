@@ -27,7 +27,6 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import rest.app.CustomerResource;
@@ -108,7 +107,7 @@ public class RestClientTestCase {
      *
      * @param customerResource configured resource ready for use, injected by Arquillian
      */
-    @Ignore("I do not know why this test is failing on Jersey (tomcat-embedded profile)")
+    //@Ignore("I do not know why this test is failing on Jersey (tomcat-embedded profile)")
     @Test
     public void getCustomerById(@ArquillianResteasyResource("rest") CustomerResource customerResource)
     {
