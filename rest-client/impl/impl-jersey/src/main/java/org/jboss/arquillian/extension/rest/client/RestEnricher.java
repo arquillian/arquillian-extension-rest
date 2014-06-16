@@ -11,23 +11,22 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Map;
 
 public class RestEnricher extends BaseRestEnricher implements TestEnricher {
-
-    @Override
-    protected boolean isSupportedParameter(Class<?> clazz)
-    {
-        return true; // it's proxy based, exception will be thrown when proxying.
-    }
 
     @Override
     protected Object enrichByType(Class<?> clazz, Method method, ArquillianResteasyResource annotation, Consumes consumes, Produces produces)
     {
         Object value;
         Client client = JerseyClientBuilder.newClient();
-        WebTarget webTarget = client.target(getBaseURL() + ((ArquillianResteasyResource) annotation).value());
+        WebTarget webTarget = client.target(getBaseURL() + annotation.value());
+        final Map<String, String> headers = getHeaders(clazz, method);
+        if (!headers.isEmpty()) {
+            webTarget.register(new HeaderFilter(headers));
+        }
         JerseyWebTarget jerseyWebTarget = (JerseyWebTarget) webTarget;
-        if (JerseyWebTarget.class.isAssignableFrom(clazz)) {
+        if (WebTarget.class.isAssignableFrom(clazz)) {
             value = jerseyWebTarget;
         } else {
             final Class<?> parameterType;
@@ -41,5 +40,11 @@ public class RestEnricher extends BaseRestEnricher implements TestEnricher {
             value = WebResourceFactory.newResource(parameterType, jerseyWebTarget);
         }
         return value;
+    }
+
+    @Override
+    protected boolean isSupportedParameter(Class<?> clazz)
+    {
+        return true; // it's proxy based, exception will be thrown when proxying.
     }
 }

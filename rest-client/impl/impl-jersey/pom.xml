@@ -134,10 +134,16 @@
             <artifactId>arquillian-protocol-servlet</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.extension</groupId>
+            <artifactId>arquillian-rest-client-test-app</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <properties>
         <jboss.version>7.1.1.Final</jboss.version>
         <version.org.jboss.jbossas>7.1.1.Final</version.org.jboss.jbossas>
-        <version.resteasy>2.3.4.Final</version.resteasy>
+        <version.resteasy>2.3.2.Final</version.resteasy>
     </properties>
 </project>

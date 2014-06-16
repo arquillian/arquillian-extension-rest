@@ -51,7 +51,7 @@
         <version.arquillian_warp>1.0.0.Alpha4</version.arquillian_warp>
 
         <!-- JAX-RS implementations -->
-        <version.resteasy_jax_rs_1_0>2.3.4.Final</version.resteasy_jax_rs_1_0>
+        <version.resteasy_jax_rs_1_0>2.3.2.Final</version.resteasy_jax_rs_1_0>
         <version.resteasy_jax_rs_2_0>3.0.4.Final</version.resteasy_jax_rs_2_0>
         <version.jersey>1.17</version.jersey>
         <version.cxf>2.7.2</version.cxf>
@@ -224,6 +224,13 @@
                 <groupId>org.jboss.spec.javax.ws.rs</groupId>
                 <artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
                 <version>1.0.1.Final</version>
+            </dependency>
+
+            <!-- Misc -->
+            <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>javax.ws.rs-api</artifactId>
+                <version>2.0</version>
             </dependency>
 
             <!-- Containers -->

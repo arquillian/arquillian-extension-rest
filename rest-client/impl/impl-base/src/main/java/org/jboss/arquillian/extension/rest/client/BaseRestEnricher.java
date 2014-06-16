@@ -17,7 +17,6 @@
  */
 package org.jboss.arquillian.extension.rest.client;
 
-
 import org.jboss.arquillian.container.spi.client.protocol.metadata.HTTPContext;
 import org.jboss.arquillian.container.spi.client.protocol.metadata.ProtocolMetaData;
 import org.jboss.arquillian.container.spi.client.protocol.metadata.Servlet;
@@ -29,13 +28,17 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public abstract class BaseRestEnricher implements TestEnricher {
+
     @Inject
     private Instance<ProtocolMetaData> metaDataInst;
 
@@ -46,11 +49,6 @@ public abstract class BaseRestEnricher implements TestEnricher {
     public void enrich(Object testCase)
     {
     }
-
-    protected abstract boolean isSupportedParameter(Class<?> clazz);
-
-    protected abstract Object enrichByType(Class<?> clazz, Method method, ArquillianResteasyResource annotation,
-                                           Consumes consumes, Produces produces);
 
     @Override
     public Object[] resolve(Method method)
@@ -70,19 +68,25 @@ public abstract class BaseRestEnricher implements TestEnricher {
                 final Annotation[] parameterAnnotations = method.getParameterAnnotations()[i];
                 for (Annotation annotation : parameterAnnotations) {
                     if (annotation instanceof ArquillianResteasyResource) {
-                        ArquillianResteasyResource arr = (ArquillianResteasyResource)annotation;
+                        ArquillianResteasyResource arr = (ArquillianResteasyResource) annotation;
                         Class<?> clazz = parameterTypes[i];
-                        if(isSupportedParameter(clazz)) {
-                            values[i] = enrichByType(clazz,method,arr,consumes,produces);
-                        }
-                        else {
-                            throw new RuntimeException("Not able to provide a client injection for type "+clazz);
+                        if (isSupportedParameter(clazz)) {
+                            values[i] = enrichByType(clazz, method, arr, consumes, produces);
+                        } else {
+                            throw new RuntimeException("Not able to provide a client injection for type " + clazz);
                         }
                     }
                 }
             }
         }
         return values;
+    }
+
+    private void addHeaders(Map<String, String> headersMap, Header annotation)
+    {
+        if (null != annotation) {
+            headersMap.put(annotation.name(), annotation.value());
+        }
     }
 
     protected boolean allInSameContext(List<Servlet> servlets)
@@ -94,6 +98,8 @@ public abstract class BaseRestEnricher implements TestEnricher {
         return context.size() == 1;
     }
 
+    protected abstract Object enrichByType(Class<?> clazz, Method method, ArquillianResteasyResource annotation, Consumes consumes, Produces produces);
+
     // Currently no way to share @ArquillianResource URL (URLResourceProvider) logic internally, copied logic
     protected URI getBaseURL()
     {
@@ -103,4 +109,27 @@ public abstract class BaseRestEnricher implements TestEnricher {
         }
         throw new IllegalStateException("No baseURL found in HTTPContext");
     }
+
+    protected Map<String, String> getHeaders(Class<?> clazz, Method method)
+    {
+        final Map<String, String> headers = getHeaders(clazz);
+        headers.putAll(getHeaders(method));
+        return headers;
+    }
+
+    protected Map<String, String> getHeaders(AnnotatedElement annotatedElement)
+    {
+        final Map<String, String> headersMap = new HashMap<String, String>();
+        final Headers headersAnnotation = annotatedElement.getAnnotation(Headers.class);
+        if (null != headersAnnotation && null != headersAnnotation.value()) {
+            for (Header header : headersAnnotation.value()) {
+                addHeaders(headersMap, header);
+            }
+        }
+        addHeaders(headersMap, annotatedElement.getAnnotation(Header.class));
+
+        return headersMap;
+    }
+
+    protected abstract boolean isSupportedParameter(Class<?> clazz);
 }
