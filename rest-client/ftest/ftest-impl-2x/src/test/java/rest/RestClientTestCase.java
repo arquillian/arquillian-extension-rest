@@ -19,21 +19,24 @@ package rest;
 
 import org.apache.http.HttpStatus;
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.extension.rest.app.Customer;
+import org.jboss.arquillian.extension.rest.app.CustomerResource;
 import org.jboss.arquillian.extension.rest.client.ArquillianResteasyResource;
 import org.jboss.arquillian.extension.rest.client.ClassModifier;
+import org.jboss.arquillian.extension.rest.client.Header;
+import org.jboss.arquillian.extension.rest.client.Headers;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
+import org.jboss.resteasy.client.ClientResponseFailure;
 import org.jboss.resteasy.client.ProxyBuilder;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import rest.app.CustomerResource;
-import rest.app.CustomerResourceImpl;
-import rest.app.model.Customer;
-import rest.app.rs.JaxRsActivator;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -42,11 +45,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.net.URL;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Arquillian Extension REST API Test Case
@@ -62,15 +67,16 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(Arquillian.class)
 public class RestClientTestCase {
 
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
     @ArquillianResource
     private URL deploymentURL;
 
     @Deployment(testable = false)
     public static WebArchive create()
     {
-        return ShrinkWrap.create(WebArchive.class)
-            .addPackage(Customer.class.getPackage())
-            .addClasses(CustomerResource.class, CustomerResourceImpl.class, JaxRsActivator.class);
+        return ShrinkWrap.create(WebArchive.class).addPackage(Customer.class.getPackage());
     }
 
     /**
@@ -114,6 +120,92 @@ public class RestClientTestCase {
         assertEquals(name, result.getName());
     }
 
+    @Header(name = "Authorization", value = "abc")
+    @Test
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void banCustomer(@ArquillianResteasyResource CustomerResource customerResource)
+    {
+//        Given
+
+//        When
+        final Customer result = customerResource.banCustomer(1L);
+
+//        Then
+        assertNotNull(result);
+        assertTrue(result.isBanned());
+    }
+
+    @Headers({@Header(name = "Authorization", value = "a"), @Header(name = "Authorization", value = "abc")})
+    @Test
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void banCustomer2(@ArquillianResteasyResource CustomerResource customerResource)
+    {
+        //        Given
+
+        //        When
+        final Customer result = customerResource.banCustomer(1L);
+
+        //        Then
+        assertNotNull(result);
+        assertTrue(result.isBanned());
+    }
+
+    @Header(name = "Authorization", value = "abc")
+    @Headers({@Header(name = "Authorization", value = "a"), @Header(name = "Authorization", value = "b")})
+    @Test
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void banCustomer3(@ArquillianResteasyResource CustomerResource customerResource)
+    {
+        //        Given
+
+        //        When
+        final Customer result = customerResource.banCustomer(1L);
+
+        //        Then
+        assertNotNull(result);
+        assertTrue(result.isBanned());
+    }
+
+    @Header(name = "Authorization", value = "abc")
+    @Test
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void banCustomerRaw(@ArquillianResteasyResource("rest/customer/1") ClientRequest clientRequest) throws Exception
+    {
+        //        Given
+
+        //        When
+        final Customer result = (Customer) clientRequest.post().getEntity(Customer.class);
+
+        //        Then
+        assertNotNull(result);
+        assertTrue(result.isBanned());
+    }
+
+    @Test
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void banCustomerWithoutAuthorization(@ArquillianResteasyResource CustomerResource customerResource)
+    {
+//        Given
+        expectedException.expect(ClientResponseFailure.class);
+        expectedException.expectMessage("Error status 401 Unauthorized returned");
+
+//        When
+        customerResource.banCustomer(1L);
+    }
+
+    @Test
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void banCustomerWithoutAuthorizationRaw(@ArquillianResteasyResource("rest/customer/1") ClientRequest clientRequest) throws Exception
+    {
+        //        Given
+
+        //        When
+        final Response post = clientRequest.post();
+
+        //        Then
+        assertEquals(401, post.getStatus());
+    }
+
     /**
      * CustomerResource.createCustomer is annotated with @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML}).
      * This means that injected proxy by default will use first mime type which in this case is JSON. To force proxy to use XML we annotate
@@ -146,7 +238,7 @@ public class RestClientTestCase {
      * @param request configured resource ready for use, injected by Arquillian
      */
     @Test
-    public void createPackageBareRsource(@ArquillianResteasyResource("rest/customer") ClientRequest request) throws Exception
+    public void createCustomerBareRsource(@ArquillianResteasyResource("rest/customer") ClientRequest request) throws Exception
     {
 //        Given
         request.body(MediaType.APPLICATION_JSON_TYPE, new Customer());

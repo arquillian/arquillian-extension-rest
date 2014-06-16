@@ -13,6 +13,7 @@
     <name>Arquillian REST Client Extension: Parent</name>
     <modules>
         <module>api</module>
+        <module>test-app</module>
         <module>impl/impl-base</module>
         <module>impl/impl-2x</module>
         <module>impl/impl-3x</module>
