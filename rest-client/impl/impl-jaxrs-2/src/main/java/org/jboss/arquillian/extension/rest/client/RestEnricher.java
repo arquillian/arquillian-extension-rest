@@ -25,6 +25,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import java.lang.reflect.Method;
+import java.util.Map;
 
 /**
  * RestEnricher
@@ -37,34 +38,33 @@ import java.lang.reflect.Method;
 public class RestEnricher extends BaseRestEnricher implements TestEnricher {
 
     @Override
-    protected boolean isSupportedParameter(Class<?> clazz) {
-        if(ClientBuilder.class.isAssignableFrom(clazz)) {
+    protected boolean isSupportedParameter(Class<?> clazz)
+    {
+        if (ClientBuilder.class.isAssignableFrom(clazz)) {
             return true;
-        }
-        else if(Client.class.isAssignableFrom(clazz)) {
+        } else if (Client.class.isAssignableFrom(clazz)) {
             return true;
-        }
-        else if(WebTarget.class.isAssignableFrom(clazz)) {
+        } else if (WebTarget.class.isAssignableFrom(clazz)) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
     @Override
-    protected Object enrichByType(Class<?> clazz,Method method, ArquillianResteasyResource annotation,
-                                  Consumes consumes, Produces produces) {
+    protected Object enrichByType(Class<?> clazz, Method method, ArquillianResteasyResource annotation, Consumes consumes, Produces produces)
+    {
         Object result = null;
-        if(ClientBuilder.class.isAssignableFrom(clazz)) {
+        if (ClientBuilder.class.isAssignableFrom(clazz)) {
             result = ClientBuilder.newBuilder();
-        }
-        else if(Client.class.isAssignableFrom(clazz)) {
+        } else if (Client.class.isAssignableFrom(clazz)) {
             result = ClientBuilder.newClient();
-        }
-        else if(WebTarget.class.isAssignableFrom(clazz)) {
-            WebTarget webTarget = ClientBuilder.newClient()
-                    .target(getBaseURL() + annotation.value());
+        } else if (WebTarget.class.isAssignableFrom(clazz)) {
+            WebTarget webTarget = ClientBuilder.newClient().target(getBaseURL() + annotation.value());
+            final Map<String, String> headers = getHeaders(clazz, method);
+            if (!headers.isEmpty()) {
+                webTarget.register(new HeaderFilter(headers));
+            }
             result = webTarget;
         }
         return result;

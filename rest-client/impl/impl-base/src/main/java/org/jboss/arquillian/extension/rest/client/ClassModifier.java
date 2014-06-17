@@ -109,7 +109,7 @@ public final class ClassModifier {
         return cc.toClass();
     }
 
-    private static CtClass getType(Object value, ClassPool classPool) throws NotFoundException
+    private static CtClass getType(Object value, Class<?> valueType, ClassPool classPool) throws NotFoundException
     {
         if (value instanceof Boolean) {
             return CtClass.booleanType;
@@ -128,7 +128,11 @@ public final class ClassModifier {
         } else if (value instanceof Double) {
             return CtClass.doubleType;
         } else {
-            return classPool.get(value.getClass().getCanonicalName());
+            try {
+                return classPool.get(value.getClass().getCanonicalName());
+            } catch (NotFoundException e) {
+                return classPool.get(valueType.getCanonicalName());
+            }
         }
     }
 
@@ -139,14 +143,18 @@ public final class ClassModifier {
             annotation.annotationType().getCanonicalName(), constpool);
         for (Method method : annotation.annotationType().getDeclaredMethods()) {
             final Object value = method.invoke(annotation);
-            newAnnotation.addMemberValue(method.getName(), toMemberValue(value, constpool, classPool));
+            Class<?> componentType = null;
+            if (method.getReturnType().isArray()) {
+                componentType = method.getReturnType().getComponentType();
+            }
+            newAnnotation.addMemberValue(method.getName(), toMemberValue(value, componentType, constpool, classPool));
         }
         return newAnnotation;
     }
 
-    private static MemberValue toMemberValue(Object value, ConstPool constpool, ClassPool classPool) throws NotFoundException
+    private static MemberValue toMemberValue(Object value, Class<?> componentType, ConstPool constpool, ClassPool classPool) throws NotFoundException
     {
-        final CtClass type = getType(value, classPool);
+        final CtClass type = getType(value, componentType, classPool);
         final MemberValue memberValue = javassist.bytecode.annotation.Annotation.createMemberValue(constpool, type);
         if (memberValue instanceof BooleanMemberValue) {
             ((BooleanMemberValue) memberValue).setValue((Boolean) value);
@@ -169,20 +177,28 @@ public final class ClassModifier {
         } else if (memberValue instanceof StringMemberValue) {
             ((StringMemberValue) memberValue).setValue((String) value);
         } else if (type.isArray()) {
-            ((ArrayMemberValue) memberValue).setValue(toMemberValue((Object[]) value, constpool, classPool));
+            ((ArrayMemberValue) memberValue).setValue(toMemberValue((Object[]) value, componentType, constpool, classPool));
         } else if (type.isInterface()) {
-            ((AnnotationMemberValue) memberValue).setValue((javassist.bytecode.annotation.Annotation) value);
+            final javassist.bytecode.annotation.Annotation annotation = new javassist.bytecode.annotation.Annotation(type.getName(), constpool);
+            for (Method method : componentType.getDeclaredMethods()) {
+                try {
+                    annotation.addMemberValue(method.getName(), toMemberValue(method.invoke(value), null, constpool, classPool));
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            ((AnnotationMemberValue) memberValue).setValue(annotation);
         } else {
             ((EnumMemberValue) memberValue).setValue((String) value);
         }
         return memberValue;
     }
 
-    private static MemberValue[] toMemberValue(Object[] value, ConstPool constpool, ClassPool classPool) throws NotFoundException
+    private static MemberValue[] toMemberValue(Object[] value, Class<?> valueType, ConstPool constpool, ClassPool classPool) throws NotFoundException
     {
         final MemberValue[] memberValues = new MemberValue[value.length];
         for (int i = 0; i < value.length; i++) {
-            memberValues[i] = toMemberValue(value[i], constpool, classPool);
+            memberValues[i] = toMemberValue(value[i], valueType, constpool, classPool);
         }
         return memberValues;
     }

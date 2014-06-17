@@ -12,6 +12,15 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <filter>
+        <filter-name>SecurityFilter</filter-name>
+        <filter-class>org.jboss.arquillian.extension.rest.app.SecurityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SecurityFilter</filter-name>
+        <servlet-name>jersey-serlvet</servlet-name>
+    </filter-mapping>
+
     <servlet-mapping>
         <servlet-name>jersey-serlvet</servlet-name>
         <url-pattern>/rest/*</url-pattern>

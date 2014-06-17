@@ -28,6 +28,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Map;
 
 /**
  * RestEnricher
@@ -38,26 +39,24 @@ import java.lang.reflect.Method;
 public class RestEnricher extends BaseRestEnricher implements TestEnricher {
 
     @Override
-    protected boolean isSupportedParameter(Class<?> clazz) {
-        return true; // it's proxy based, exception will be thrown when proxying.
-    }
-
-    @Override
-    protected Object enrichByType(Class<?> clazz, Method method,
-                                  ArquillianResteasyResource annotation, Consumes consumes, Produces produces) {
-        Object value = null;
+    protected Object enrichByType(Class<?> clazz, Method method, ArquillianResteasyResource annotation, Consumes consumes, Produces produces)
+    {
+        Object value;
         Client client = ResteasyClientBuilder.newClient();
-        WebTarget webTarget = client.target(getBaseURL() + ((ArquillianResteasyResource) annotation).value());
+        WebTarget webTarget = client.target(getBaseURL() + annotation.value());
+        final Map<String, String> headers = getHeaders(clazz, method);
+        if (!headers.isEmpty()) {
+            webTarget.register(new HeaderFilter(headers));
+        }
         ResteasyWebTarget resteasyWebTarget = (ResteasyWebTarget) webTarget;
-        if (ResteasyWebTarget.class.isAssignableFrom(clazz)) {
+        if (WebTarget.class.isAssignableFrom(clazz)) {
             value = resteasyWebTarget;
         } else {
             final Class<?> parameterType;
             try {
                 final Annotation[] methodDeclaredAnnotations = method.getDeclaredAnnotations();
 //                                This is test method so if it only contains @Test annotation then we don't need to hassel with substitutions
-                parameterType = methodDeclaredAnnotations.length <= 1 ? clazz : ClassModifier.getModifiedClass(clazz,
-                        methodDeclaredAnnotations);
+                parameterType = methodDeclaredAnnotations.length <= 1 ? clazz : ClassModifier.getModifiedClass(clazz, methodDeclaredAnnotations);
             } catch (Exception e) {
                 throw new RuntimeException("Cannot substitute annotations for method " + method.getName(), e);
             }
@@ -73,4 +72,9 @@ public class RestEnricher extends BaseRestEnricher implements TestEnricher {
         return value;
     }
 
+    @Override
+    protected boolean isSupportedParameter(Class<?> clazz)
+    {
+        return true; // it's proxy based, exception will be thrown when proxying.
+    }
 }
