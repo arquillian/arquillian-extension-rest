@@ -347,11 +347,13 @@
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
+            <version>${version.jersey}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.ext</groupId>
             <artifactId>jersey-proxy-client</artifactId>
+            <version>${version.jersey}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -368,7 +370,7 @@
     </dependencies>
     <properties>
         <jboss.version>7.1.1.Final</jboss.version>
-        <version.jersey>2.8</version.jersey>
+        <version.jersey>2.6</version.jersey>
         <version.jersey.providers>2.3.0</version.jersey.providers>
         <version.org.jboss.jbossas>7.1.1.Final</version.org.jboss.jbossas>
         <version.resteasy>3.0.1.Final</version.resteasy>
