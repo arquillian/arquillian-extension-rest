@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>arquillian-rest-parent</artifactId>
         <groupId>org.jboss.arquillian.extension</groupId>
-        <version>1.0.0.Final-SNAPSHOT</version>
+        <version>1.0.0.Alpha3</version>
         <relativePath>../../../</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -128,12 +127,10 @@
                                 <configuration>
                                     <tasks>
                                         <!-- Remove the default ROOT webapp so it won't collide with tests -->
-                                        <delete dir="${project.build.directory}/apache-tomcat-${version.org.apache.tomcat}/webapps/ROOT"/>
-                                        <mkdir dir="${project.build.directory}/downloads"/>
-                                        <get src="http://archive.apache.org/dist/tomcat/tomcat-7/v${version.org.apache.tomcat}/bin/apache-tomcat-${version.org.apache.tomcat}.zip"
-                                             dest="${project.build.directory}/downloads" verbose="true" skipexisting="true"/>
-                                        <unzip src="${project.build.directory}/downloads/apache-tomcat-${version.org.apache.tomcat}.zip"
-                                               dest="${project.build.directory}"/>
+                                        <delete dir="${project.build.directory}/apache-tomcat-${version.org.apache.tomcat}/webapps/ROOT" />
+                                        <mkdir dir="${project.build.directory}/downloads" />
+                                        <get src="http://archive.apache.org/dist/tomcat/tomcat-7/v${version.org.apache.tomcat}/bin/apache-tomcat-${version.org.apache.tomcat}.zip" dest="${project.build.directory}/downloads" verbose="true" skipexisting="true" />
+                                        <unzip src="${project.build.directory}/downloads/apache-tomcat-${version.org.apache.tomcat}.zip" dest="${project.build.directory}" />
                                     </tasks>
                                 </configuration>
                             </execution>
