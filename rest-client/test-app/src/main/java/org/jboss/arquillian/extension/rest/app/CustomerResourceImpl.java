@@ -68,6 +68,7 @@ public class CustomerResourceImpl implements CustomerResource {
     @Override
     public Customer createCustomer(Customer customer)
     {
+        findAllCustomers(); // ARQ-1813 Force creation of Customer list to fix ID's.
         customer.setId(nextId());
         return customer;
     }
