@@ -17,7 +17,7 @@
  */
 package org.jboss.arquillian.extension.rest.app;
 
-import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import java.util.ArrayList;
@@ -28,8 +28,12 @@ import java.util.List;
  */
 public class CustomerResourceImpl implements CustomerResource {
 
+    private static final String CUSTOMERS_ATTRIBUTE_NAME = "customers";
+
+    private static final String CUSTOMER_ID_SEQUENCE_ATTRIBUTE_NAME = "customerIdSequence";
+
     @Context
-    private ServletContext servletContext;
+    private HttpServletRequest httpServletRequest;
 
     @Override
     public List<Customer> getAllCustomers()
@@ -68,22 +72,21 @@ public class CustomerResourceImpl implements CustomerResource {
     @Override
     public Customer createCustomer(Customer customer)
     {
-        findAllCustomers(); // ARQ-1813 Force creation of Customer list to fix ID's.
         customer.setId(nextId());
         return customer;
     }
 
     private List<Customer> findAllCustomers()
     {
-        final String attributeName = "customers";
-        final Object attribute = servletContext.getAttribute(attributeName);
+        final Object attribute = httpServletRequest.getAttribute(CUSTOMERS_ATTRIBUTE_NAME);
         List<Customer> customers;
         if (!(attribute instanceof List)) {
             customers = new ArrayList<Customer>();
             customers.add(new Customer(nextId(), "Acme Corporation"));
             customers.add(new Customer(nextId(), "Don"));
-            servletContext.setAttribute(attributeName, customers);
+            httpServletRequest.setAttribute(CUSTOMERS_ATTRIBUTE_NAME, customers);
         } else {
+            //noinspection unchecked
             customers = (List<Customer>) attribute;
         }
         return customers;
@@ -101,15 +104,14 @@ public class CustomerResourceImpl implements CustomerResource {
 
     private long nextId()
     {
-        final String attributeName = "customerIdSequence";
-        final Object attribute = servletContext.getAttribute(attributeName);
+        final Object attribute = httpServletRequest.getAttribute(CUSTOMER_ID_SEQUENCE_ATTRIBUTE_NAME);
         long newValue;
         if (attribute instanceof Long) {
             newValue = ((Long) attribute) + 1;
         } else {
             newValue = 1;
         }
-        servletContext.setAttribute(attributeName, newValue);
+        httpServletRequest.setAttribute(CUSTOMER_ID_SEQUENCE_ATTRIBUTE_NAME, newValue);
         return newValue;
     }
 }
