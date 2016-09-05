@@ -9,9 +9,14 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>arquillian-rest-client-impl-3x-ftest</artifactId>
     <name>Arquillian REST Client Extension: Impl-3x Functional Tests</name>
+    <properties>
+        <version.resteasy>3.0.11.Final</version.resteasy>
+        <version.wildfly>9.0.2.Final</version.wildfly>
+        <arquillian.wildfly.version>1.1.0.Final</arquillian.wildfly.version>
+    </properties>
     <profiles>
         <profile>
-            <id>arq-jbossas-managed-7</id>
+            <id>arq-wildfly-build-managed</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -21,7 +26,7 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
                             <systemProperties>
-                                <jboss.version>${version.org.jboss.jbossas}</jboss.version>
+                                <jboss.version>${version.wildfly}</jboss.version>
                             </systemProperties>
                         </configuration>
                     </plugin>
@@ -38,12 +43,12 @@
                                 <configuration>
                                     <artifactItems>
                                         <artifactItem>
-                                            <artifactId>jboss-as-dist</artifactId>
-                                            <groupId>org.jboss.as</groupId>
+                                            <groupId>org.wildfly</groupId>
+                                            <artifactId>wildfly-dist</artifactId>
+                                            <version>${version.wildfly}</version>
                                             <outputDirectory>${project.build.directory}/</outputDirectory>
-                                            <overWrite>false</overWrite>
                                             <type>zip</type>
-                                            <version>${version.org.jboss.jbossas}</version>
+                                            <overWrite>false</overWrite>
                                         </artifactItem>
                                     </artifactItems>
                                 </configuration>
@@ -54,20 +59,20 @@
             </build>
             <dependencies>
                 <dependency>
-                    <groupId>org.jboss.as</groupId>
-                    <artifactId>jboss-as-arquillian-container-managed</artifactId>
-                    <version>${version.org.jboss.jbossas}</version>
+                    <groupId>org.wildfly.arquillian</groupId>
+                    <artifactId>wildfly-arquillian-container-managed</artifactId>
+                    <version>${arquillian.wildfly.version}</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
         </profile>
         <profile>
-            <id>arq-jbossas-remote-7</id>
+            <id>arq-wildfly-build-remote</id>
             <dependencies>
                 <dependency>
-                    <groupId>org.jboss.as</groupId>
-                    <artifactId>jboss-as-arquillian-container-remote</artifactId>
-                    <version>${version.org.jboss.jbossas}</version>
+                    <groupId>org.wildfly.arquillian</groupId>
+                    <artifactId>wildfly-arquillian-container-remote</artifactId>
+                    <version>${arquillian.wildfly.version}</version>
                     <scope>test</scope>
                 </dependency>
             </dependencies>
@@ -116,7 +121,8 @@
         </dependency>
         <dependency>
             <groupId>org.jboss.spec.javax.ws.rs</groupId>
-            <artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
+            <artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
+            <version>1.0.0.Final</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -126,9 +132,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <properties>
-        <jboss.version>7.1.1.Final</jboss.version>
-        <version.org.jboss.jbossas>7.1.1.Final</version.org.jboss.jbossas>
-        <version.resteasy>3.0.1.Final</version.resteasy>
-    </properties>
 </project>

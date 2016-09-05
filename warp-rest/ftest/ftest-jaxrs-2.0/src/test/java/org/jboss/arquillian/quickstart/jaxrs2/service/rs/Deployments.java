@@ -23,8 +23,7 @@ import org.jboss.arquillian.quickstart.jaxrs2.service.StockService;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
-import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 
 import java.io.File;
 
@@ -57,11 +56,10 @@ final class Deployments {
      * @return the loaded dependencies
      */
     private static File[] loadLibraries() {
-        return DependencyResolvers.use(MavenDependencyResolver.class)
-                .artifacts("org.jboss.resteasy:resteasy-jaxrs:3.0.4.Final")
-                .artifacts("org.jboss.resteasy:resteasy-jaxb-provider:3.0.4.Final")
-//                .artifacts("org.jboss.resteasy:resteasy-jackson-provider:3.0.4.Final")
-                .artifacts("org.easytesting:fest-assert:1.4")
-                .resolveAsFiles();
+        return Maven.resolver()
+                .resolve("org.jboss.resteasy:resteasy-jaxrs:3.0.4.Final",
+                        "org.jboss.resteasy:resteasy-jaxb-provider:3.0.4.Final",
+                        "org.easytesting:fest-assert:1.4")
+                .withTransitivity().asFile();
     }
 }
