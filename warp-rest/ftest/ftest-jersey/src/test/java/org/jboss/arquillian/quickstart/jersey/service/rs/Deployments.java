@@ -23,8 +23,7 @@ import org.jboss.arquillian.quickstart.jersey.service.StockService;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
-import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 
 import java.io.File;
 
@@ -57,14 +56,11 @@ final class Deployments {
      * @return the loaded dependencies
      */
     private static File[] loadLibraries() {
-        return DependencyResolvers.use(MavenDependencyResolver.class)
-                .loadMetadataFromPom("pom.xml")
-                .artifacts("org.easytesting:fest-assert")
-                .artifacts("com.sun.jersey:jersey-json")
-                .artifacts("com.sun.jersey:jersey-client")
-                .artifacts("com.sun.jersey:jersey-server")
-                .artifacts("com.sun.jersey:jersey-servlet")
-                .exclusion("javax.servlet:*")
-                .resolveAsFiles();
+        return Maven.resolver()
+                .loadPomFromFile("pom.xml")
+                .resolve("org.easytesting:fest-assert","com.sun.jersey:jersey-json","com.sun.jersey:jersey-client"
+                        ,"com.sun.jersey:jersey-server","com.sun.jersey:jersey-servlet")
+                .withTransitivity()
+                .asFile();
     }
 }

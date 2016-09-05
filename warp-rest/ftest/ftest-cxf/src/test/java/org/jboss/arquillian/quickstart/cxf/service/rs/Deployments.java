@@ -23,8 +23,7 @@ import org.jboss.arquillian.quickstart.cxf.service.StockService;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
-import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 
 import java.io.File;
 
@@ -57,11 +56,9 @@ final class Deployments {
      * @return the loaded dependencies
      */
     private static File[] loadLibraries() {
-        return DependencyResolvers.use(MavenDependencyResolver.class)
-                .loadMetadataFromPom("pom.xml")
-                .artifacts("org.apache.cxf:cxf-rt-frontend-jaxrs")
-                .artifacts("org.apache.cxf:cxf-rt-rs-extension-providers")
-                .artifacts("org.codehaus.jettison:jettison")
-                .resolveAsFiles();
+        return Maven.resolver().loadPomFromFile("pom.xml")
+                .resolve("org.apache.cxf:cxf-rt-frontend-jaxrs","org.apache.cxf:cxf-rt-rs-extension-providers","org.codehaus.jettison:jettison")
+                .withTransitivity()
+                .asFile();
     }
 }
