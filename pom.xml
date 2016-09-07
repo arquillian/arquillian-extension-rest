@@ -61,7 +61,7 @@
         <version.junit>4.11</version.junit>
         <version.mockito>1.10.19</version.mockito>
         <version.fest.assert>1.4</version.fest.assert>
-        <version.shrinkwrap.resolvers>2.2.3</version.shrinkwrap.resolvers>
+        <version.shrinkwrap.resolver>2.2.4</version.shrinkwrap.resolver>
         <version.jboss_spec>3.0.0.Final</version.jboss_spec>
         <version.org.jboss.jbossas>7.1.1.Final</version.org.jboss.jbossas>
         <version.org.glassfish>3.1.2</version.org.glassfish>
@@ -120,13 +120,13 @@
                 <type>pom</type>
             </dependency>
 
-                <dependency>
-                    <groupId>org.jboss.shrinkwrap.resolver</groupId>
-                    <artifactId>shrinkwrap-resolver-depchain</artifactId>
-                    <version>${version.shrinkwrap.resolvers}</version>
-                    <scope>test</scope>
-                    <type>pom</type>
-                </dependency>
+            <dependency>
+                <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                <artifactId>shrinkwrap-resolver-depchain</artifactId>
+                <version>${version.shrinkwrap.resolver}</version>
+                <scope>test</scope>
+                <type>pom</type>
+            </dependency>
 
             <dependency>
                 <groupId>org.jboss.arquillian.test</groupId>

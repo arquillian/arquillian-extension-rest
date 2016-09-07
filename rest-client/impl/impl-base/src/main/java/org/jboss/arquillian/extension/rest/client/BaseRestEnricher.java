@@ -17,12 +17,11 @@
  */
 package org.jboss.arquillian.extension.rest.client;
 
-import org.jboss.arquillian.container.spi.client.protocol.metadata.HTTPContext;
-import org.jboss.arquillian.container.spi.client.protocol.metadata.ProtocolMetaData;
-import org.jboss.arquillian.container.spi.client.protocol.metadata.Servlet;
 import org.jboss.arquillian.core.api.Instance;
 import org.jboss.arquillian.core.api.annotation.Inject;
+import org.jboss.arquillian.core.spi.ServiceLoader;
 import org.jboss.arquillian.test.spi.TestEnricher;
+import org.jboss.arquillian.test.spi.enricher.resource.ResourceProvider;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
@@ -31,19 +30,17 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
 import java.net.URI;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public abstract class BaseRestEnricher implements TestEnricher {
 
     @Inject
-    private Instance<ProtocolMetaData> metaDataInst;
+    private Instance<Response> responseInst;
 
     @Inject
-    private Instance<Response> responseInst;
+    private Instance<ServiceLoader> loader;
 
     @Override
     public void enrich(Object testCase)
@@ -89,25 +86,25 @@ public abstract class BaseRestEnricher implements TestEnricher {
         }
     }
 
-    protected boolean allInSameContext(List<Servlet> servlets)
-    {
-        Set<String> context = new HashSet<String>();
-        for (Servlet servlet : servlets) {
-            context.add(servlet.getContextRoot());
-        }
-        return context.size() == 1;
-    }
-
     protected abstract Object enrichByType(Class<?> clazz, Method method, ArquillianResteasyResource annotation, Consumes consumes, Produces produces);
 
-    // Currently no way to share @ArquillianResource URL (URLResourceProvider) logic internally, copied logic
+    // Currently no way to request value of URI, need to manually invoke the lookup
     protected URI getBaseURL()
     {
-        HTTPContext context = metaDataInst.get().getContext(HTTPContext.class);
-        if (allInSameContext(context.getServlets())) {
-            return context.getServlets().get(0).getBaseURI();
+        Collection<ResourceProvider> resourceProviders = loader.get().all(ResourceProvider.class);
+        for(ResourceProvider resourceProvider: resourceProviders)
+        {
+            if(resourceProvider.canProvide(URI.class))
+            {
+                Object value = resourceProvider.lookup(ArquillianResourceLiteral.INSTANCE);
+                if(value == null)
+                {
+                    throw new RuntimeException("Provider for type URI returned a null value: " + resourceProvider);
+                }
+                return (URI)value;
+            }
         }
-        throw new IllegalStateException("No baseURL found in HTTPContext");
+        throw new IllegalArgumentException("No ResourceProvider found for URI");
     }
 
     protected Map<String, String> getHeaders(Class<?> clazz, Method method)
