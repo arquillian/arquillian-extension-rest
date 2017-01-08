@@ -80,7 +80,7 @@ It's an interface properly decorated with JAX-RS annotations.
 It might be a nice way to extract your app's REST resources interfaces into separate module so that it can be used later on in tests and clients.
 
 ##What if I want to be naughty?
-Let's suppose you want to test what will happen if you make GET request to "/rest/customer" but tell server you accept only YAML. Nothing simpler. Just put @Consumes annotation on your test method. It will overwrite annotations from CustomerResource interface.
+Let's suppose you want to test what will happen if you make GET request to "/rest/customer" but tell server you accept only YAML. Nothing simpler. Just put `@Consumes` annotation on your test method. It will overwrite annotations from CustomerResource interface.
 
 ```java
     @Test
@@ -125,7 +125,7 @@ The objects we're passing (i.e. Customer) are being marshaled by JAXB, Jackson, 
 In the example above we want to do POST against "rest/customer", send customer in JSON fromat but add some field "biskupa" that actually does not exist in Customer class. What's more we want to specify authorization header to mimic Basic Authorization and instruct serve to return response in ATOM format.
 Of course this test will not pass (we told server to respond in ATOM format and then we do assertion for JSON), but it's purpose here is to show you what cool customization we can do.
 
-Notice that `org.jboss.resteasy.client.jaxrs.ResteasyWebTarget` is available only if you use `arquillian-rest-client-impl-3x`. If you use arquillian-rest-client-impl-2x then you should inject `org.jboss.resteasy.client.ClientRequest`. More details at the end.
+Notice that `org.jboss.resteasy.client.jaxrs.ResteasyWebTarget` is available only if you use `arquillian-rest-client-impl-3x`. If you use `arquillian-rest-client-impl-2x` then you should inject `org.jboss.resteasy.client.ClientRequest`. More details at the end.
 
 ##So how does this extension know the URL of my API?
 Well, Arquillian knows very well where it has deployed the archive. The path to API is taken from @ArquillianResteasyResource which by default is "rest". If your API is located somewhere else then simply specify it i.e.: `@ArquillianResteasyResource("api/v2")`. Note lack of preceeding and trailing slashes.
