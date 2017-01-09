@@ -19,7 +19,7 @@ incoming request, response, status code, headers and i.e. returned entity.
 
 In order to setup the project one need only to add one of the REST implementations for the targeted JAX-RS version.
 
-```
+```xml
    <dependency>
        <groupId>org.jboss.arquillian.extension</groupId>
        <artifactId>arquillian-rest-warp-impl-jaxrs-2.0</artifactId>
@@ -38,7 +38,7 @@ automatically. In order cases the proper interceptor will have to be properly re
 
 ### Example test:
 
-```
+```java
    @WarpTest
    @RunWith(Arquillian.class)
    public class StockServiceResourceTestCase {
