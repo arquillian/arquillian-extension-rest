@@ -118,7 +118,7 @@ The objects we're passing (i.e. Customer) are being marshaled by JAXB, Jackson, 
         //        Then
         assertEquals(deploymentURL + "rest/customer", webTarget.getUri().toASCIIString());
         assertEquals(MediaType.APPLICATION_JSON, response.getMediaType().toString());
-        assertEquals(HttpStatus.SC_OK, response.getStatus());
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
     }
 ```
 
