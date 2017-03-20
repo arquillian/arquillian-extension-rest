@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.jboss</groupId>
         <artifactId>jboss-parent</artifactId>
-        <version>14</version>
+        <version>22</version>
         <relativePath />
     </parent>
 
@@ -46,7 +46,7 @@
 
     <properties>
         <!-- Arquillian -->
-        <version.arquillian_core>1.1.11.Final</version.arquillian_core>
+        <version.arquillian_core>1.1.12.Final</version.arquillian_core>
         <version.arquillian_drone>1.1.0.Final</version.arquillian_drone>
         <version.arquillian_warp>1.0.0.Alpha4</version.arquillian_warp>
 
@@ -58,17 +58,17 @@
         <version.springframework>3.2.1.RELEASE</version.springframework>
 
         <!-- Tests -->
-        <version.junit>4.11</version.junit>
+        <version.junit>4.12</version.junit>
         <version.mockito>1.10.19</version.mockito>
         <version.fest.assert>1.4</version.fest.assert>
-        <version.shrinkwrap.resolvers>2.2.3</version.shrinkwrap.resolvers>
+        <version.shrinkwrap.resolvers>2.2.6</version.shrinkwrap.resolvers>
         <version.jboss_spec>3.0.0.Final</version.jboss_spec>
         <version.org.jboss.jbossas>7.1.1.Final</version.org.jboss.jbossas>
         <version.org.glassfish>3.1.2</version.org.glassfish>
 
         <!-- override from parent -->
-        <maven.compiler.argument.target>1.5</maven.compiler.argument.target>
-        <maven.compiler.argument.source>1.5</maven.compiler.argument.source>
+        <maven.compiler.target>1.5</maven.compiler.target>
+        <maven.compiler.source>1.5</maven.compiler.source>
         <tomcat.version>7.0.42</tomcat.version>
     </properties>
 
