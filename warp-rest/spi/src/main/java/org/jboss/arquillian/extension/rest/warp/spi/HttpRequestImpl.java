@@ -67,7 +67,8 @@ public class HttpRequestImpl implements HttpRequest {
     /**
      * Sets the http method.
      *
-     * @param httpMethod the http method
+     * @param httpMethod
+     *     the http method
      */
     public void setMethod(HttpMethod httpMethod) {
         this.httpMethod = httpMethod;
@@ -84,7 +85,8 @@ public class HttpRequestImpl implements HttpRequest {
     /**
      * Sets the content type.
      *
-     * @param contentType the content type
+     * @param contentType
+     *     the content type
      */
     public void setContentType(String contentType) {
         this.contentType = contentType;
@@ -101,7 +103,8 @@ public class HttpRequestImpl implements HttpRequest {
     /**
      * Sets the request entity.
      *
-     * @param entity the request entity
+     * @param entity
+     *     the request entity
      */
     public void setEntity(Object entity) {
         this.entity = entity;
@@ -118,7 +121,8 @@ public class HttpRequestImpl implements HttpRequest {
     /**
      * Sets the http headers.
      *
-     * @param headers the http headers
+     * @param headers
+     *     the http headers
      */
     public void setHeaders(MultivaluedMap<String, String> headers) {
         this.headers = headers;

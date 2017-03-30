@@ -42,7 +42,7 @@ import java.util.Map;
 
 /**
  * The CXF specific {@link RestContext} builder.
- *
+ * <p>
  * <p><strong>Thread-safety:</strong>This class is mutable and not thread safe.</p>
  *
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
@@ -87,7 +87,8 @@ final class CxfContextBuilder implements RestContextBuilder {
     /**
      * Creates new instance of {@link CxfContextBuilder} class.
      *
-     * @param servletRequest the servlet request
+     * @param servletRequest
+     *     the servlet request
      */
     private CxfContextBuilder(ServletRequest servletRequest) {
         Validate.notNull(servletRequest, "The 'servletRequest' can not be null.");
@@ -99,11 +100,13 @@ final class CxfContextBuilder implements RestContextBuilder {
     /**
      * The utility method that creates new instance of {@link CxfContextBuilder}.
      *
-     * @param servletRequest the servlet request
+     * @param servletRequest
+     *     the servlet request
      *
      * @return the created builder instance
      *
-     * @throws IllegalArgumentException if servletRequest is null
+     * @throws IllegalArgumentException
+     *     if servletRequest is null
      */
     public static CxfContextBuilder buildContext(ServletRequest servletRequest) {
 
@@ -113,7 +116,8 @@ final class CxfContextBuilder implements RestContextBuilder {
     /**
      * Sets the request message
      *
-     * @param requestMessage the request message
+     * @param requestMessage
+     *     the request message
      *
      * @return the context builder
      */
@@ -126,7 +130,8 @@ final class CxfContextBuilder implements RestContextBuilder {
     /**
      * Sets the response message.
      *
-     * @param responseMessage the response message
+     * @param responseMessage
+     *     the response message
      *
      * @return the context builder
      */
@@ -139,7 +144,8 @@ final class CxfContextBuilder implements RestContextBuilder {
     /**
      * Sets the response.
      *
-     * @param response the response
+     * @param response
+     *     the response
      *
      * @return the context builder
      */
@@ -152,7 +158,8 @@ final class CxfContextBuilder implements RestContextBuilder {
     /**
      * Sets the message context.
      *
-     * @param messageContext the message context
+     * @param messageContext
+     *     the message context
      */
     public CxfContextBuilder setMessageContext(MessageContext messageContext) {
 
@@ -206,7 +213,7 @@ final class CxfContextBuilder implements RestContextBuilder {
             response.setStatusCode(this.response.getStatus());
             response.setEntity(this.response.getEntity());
             response.setHeaders(getHeaders((Map<String, List<Object>>)
-                    this.responseMessage.get(Message.PROTOCOL_HEADERS)));
+                this.responseMessage.get(Message.PROTOCOL_HEADERS)));
         }
 
         return response;
@@ -221,7 +228,7 @@ final class CxfContextBuilder implements RestContextBuilder {
 
         SecurityContextImpl securityContext = new SecurityContextImpl();
 
-        if(messageContext != null && messageContext.getSecurityContext() != null) {
+        if (messageContext != null && messageContext.getSecurityContext() != null) {
             securityContext.setPrincipal(messageContext.getSecurityContext().getUserPrincipal());
             securityContext.setAuthenticationScheme(messageContext.getSecurityContext().getAuthenticationScheme());
         }
@@ -236,13 +243,14 @@ final class CxfContextBuilder implements RestContextBuilder {
     public Object getRequestEntity() {
 
         return requestMessage.getContentFormats().size() > 0 ?
-                requestMessage.getContent(requestMessage.getContentFormats().iterator().next()) : null;
+            requestMessage.getContent(requestMessage.getContentFormats().iterator().next()) : null;
     }
 
     /**
      * Maps the http method name to {@link HttpMethod}.
      *
-     * @param methodName the method name
+     * @param methodName
+     *     the method name
      *
      * @return the {@link HttpMethod}
      */
@@ -254,16 +262,18 @@ final class CxfContextBuilder implements RestContextBuilder {
     /**
      * Maps the headers object value map into simple string representation.
      *
-     * @param httpHeaders the http headers map
-     *
-     * @param <TKey> the key type
-     * @param <TVal> the value type
+     * @param httpHeaders
+     *     the http headers map
+     * @param <TKey>
+     *     the key type
+     * @param <TVal>
+     *     the value type
      *
      * @return the result map
      */
     private <TKey, TVal> MultivaluedMap<TKey, TVal> getHeaders(Map<TKey, List<TVal>> httpHeaders) {
 
-        if(httpHeaders == null) {
+        if (httpHeaders == null) {
             return null;
         }
 
@@ -282,9 +292,9 @@ final class CxfContextBuilder implements RestContextBuilder {
     private static CxfContextBuilder getCxfContextBuilder(ServletRequest servletRequest) {
 
         CxfContextBuilder cxfContextBuilder = (CxfContextBuilder)
-                servletRequest.getAttribute(BUILDER_ATTRIBUTE_NAME);
+            servletRequest.getAttribute(BUILDER_ATTRIBUTE_NAME);
 
-        if(cxfContextBuilder == null) {
+        if (cxfContextBuilder == null) {
 
             cxfContextBuilder = new CxfContextBuilder(servletRequest);
             servletRequest.setAttribute(BUILDER_ATTRIBUTE_NAME, cxfContextBuilder);

@@ -97,11 +97,11 @@ public class StockServiceResourceTestCase {
         provider.setConvention("badgerfish");
 
         stockService = JAXRSClientFactory.create(contextPath + "app/rest/",
-                StockService.class, Arrays.asList(provider));
+            StockService.class, Arrays.asList(provider));
 
         WebClient.client(stockService)
-                .type(MediaType.APPLICATION_JSON_TYPE)
-                .accept(MediaType.APPLICATION_JSON_TYPE);
+            .type(MediaType.APPLICATION_JSON_TYPE)
+            .accept(MediaType.APPLICATION_JSON_TYPE);
     }
 
     @Test

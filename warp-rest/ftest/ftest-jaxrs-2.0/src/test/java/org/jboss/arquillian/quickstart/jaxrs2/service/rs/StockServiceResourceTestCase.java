@@ -105,7 +105,7 @@ public class StockServiceResourceTestCase {
     public void setUp() {
 
         ResteasyClient client = new ResteasyClientBuilder().build();
-        ResteasyWebTarget  target = client.target(contextPath + "rest");
+        ResteasyWebTarget target = client.target(contextPath + "rest");
 
         stockService = target.proxy(StockService.class);
     }

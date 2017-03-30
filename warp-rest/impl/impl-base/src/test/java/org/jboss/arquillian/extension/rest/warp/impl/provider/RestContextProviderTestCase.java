@@ -81,7 +81,8 @@ public class RestContextProviderTestCase extends AbstractTestTestBase {
     /**
      * Registers extensions.
      *
-     * @param extensions the list of extensions
+     * @param extensions
+     *     the list of extensions
      */
     @Override
     protected void addExtensions(List<Class<?>> extensions) {
@@ -131,7 +132,7 @@ public class RestContextProviderTestCase extends AbstractTestTestBase {
 
     /**
      * Tests the {@link RestContextProvider#lookup(ArquillianResource, java.lang.annotation.Annotation...)}.
-     * <p />
+     * <p/>
      * {@link RestContextNotFoundException} is expected.
      */
     @Test(expected = RestContextNotFoundException.class)

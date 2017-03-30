@@ -83,7 +83,8 @@ public class Stock {
     /**
      * Sets the stock id.
      *
-     * @param id the stock id
+     * @param id
+     *     the stock id
      */
     public void setId(Long id) {
         this.id = id;
@@ -101,7 +102,8 @@ public class Stock {
     /**
      * Sets the stock name.
      *
-     * @param name the stock name
+     * @param name
+     *     the stock name
      */
     public void setName(String name) {
         this.name = name;
@@ -119,7 +121,8 @@ public class Stock {
     /**
      * Sets the stock code.
      *
-     * @param code the stock id
+     * @param code
+     *     the stock id
      */
     public void setCode(String code) {
         this.code = code;
@@ -137,7 +140,8 @@ public class Stock {
     /**
      * Sets the stock valuation date.
      *
-     * @param date the stock valuation date
+     * @param date
+     *     the stock valuation date
      */
     public void setDate(Date date) {
         this.date = date;
@@ -155,7 +159,8 @@ public class Stock {
     /**
      * Retrieves the stock value.
      *
-     * @param value the stock value
+     * @param value
+     *     the stock value
      */
     public void setValue(BigDecimal value) {
         this.value = value;

@@ -76,47 +76,49 @@ public class RestClientTestCase {
     private URL deploymentURL;
 
     @Deployment(testable = false)
-    public static WebArchive create()
-    {
+    public static WebArchive create() {
         return ShrinkWrap.create(WebArchive.class).addPackage(Customer.class.getPackage());
     }
 
     /**
-     * Arquillian by default substitutes overlaping annotations from injected resource methods (all methods) with those from test method.
+     * Arquillian by default substitutes overlaping annotations from injected resource methods (all methods) with those
+     * from test method.
      * If you need to modify one method in one way and another differently then you must create separate interface.
      *
-     * @param customerResource configured resource ready for use, injected by Arquillian
+     * @param customerResource
+     *     configured resource ready for use, injected by Arquillian
      */
     @Test
-    public void getAllCustomersWithCustomInterface(@ArquillianResteasyResource("rest") CustomCustomerResource customerResource)
-    {
-//        Given
+    public void getAllCustomersWithCustomInterface(
+        @ArquillianResteasyResource("rest") CustomCustomerResource customerResource) {
+        //        Given
 
-//        When
+        //        When
         final List<Customer> result = customerResource.getAllCustomers();
 
-//        Then
+        //        Then
         assertNotNull(result);
         assertEquals(2, result.size());
     }
 
     /**
-     * Arquillian calculates resource path by using deployment URL+ArquillianResteasyResource.value which is by default "rest".
+     * Arquillian calculates resource path by using deployment URL+ArquillianResteasyResource.value which is by default
+     * "rest".
      * If your API is located under different root i.e. "api_v2" then use @ArquillianResteasyResource("api_v2")
      *
-     * @param customerResource configured resource ready for use, injected by Arquillian
+     * @param customerResource
+     *     configured resource ready for use, injected by Arquillian
      */
     @Test
-    public void getCustomerById(@ArquillianResteasyResource("rest") CustomerResource customerResource)
-    {
-//        Given
+    public void getCustomerById(@ArquillianResteasyResource("rest") CustomerResource customerResource) {
+        //        Given
         final String name = "Acme Corporation";
         final long customerId = 1L;
 
-//        When
+        //        When
         final Customer result = customerResource.getCustomerById(customerId);
 
-//        Then
+        //        Then
         assertNotNull(result);
         assertNotNull(result.getId());
         assertEquals(name, result.getName());
@@ -125,14 +127,13 @@ public class RestClientTestCase {
     @Header(name = "Authorization", value = "abc")
     @Test
     @Consumes(MediaType.APPLICATION_JSON)
-    public void banCustomer(@ArquillianResteasyResource CustomerResource customerResource)
-    {
-//        Given
+    public void banCustomer(@ArquillianResteasyResource CustomerResource customerResource) {
+        //        Given
 
-//        When
+        //        When
         final Customer result = customerResource.banCustomer(1L);
 
-//        Then
+        //        Then
         assertNotNull(result);
         assertTrue(result.isBanned());
     }
@@ -140,8 +141,7 @@ public class RestClientTestCase {
     @Headers({@Header(name = "Authorization", value = "a"), @Header(name = "Authorization", value = "abc")})
     @Test
     @Consumes(MediaType.APPLICATION_JSON)
-    public void banCustomer2(@ArquillianResteasyResource CustomerResource customerResource)
-    {
+    public void banCustomer2(@ArquillianResteasyResource CustomerResource customerResource) {
         //        Given
 
         //        When
@@ -156,8 +156,7 @@ public class RestClientTestCase {
     @Headers({@Header(name = "Authorization", value = "a"), @Header(name = "Authorization", value = "b")})
     @Test
     @Consumes(MediaType.APPLICATION_JSON)
-    public void banCustomer3(@ArquillianResteasyResource CustomerResource customerResource)
-    {
+    public void banCustomer3(@ArquillianResteasyResource CustomerResource customerResource) {
         //        Given
 
         //        When
@@ -171,8 +170,7 @@ public class RestClientTestCase {
     @Header(name = "Authorization", value = "abc")
     @Test
     @Consumes(MediaType.APPLICATION_JSON)
-    public void banCustomerRaw(@ArquillianResteasyResource WebTarget webTarget)
-    {
+    public void banCustomerRaw(@ArquillianResteasyResource WebTarget webTarget) {
         //        Given
 
         //        When
@@ -185,19 +183,17 @@ public class RestClientTestCase {
 
     @Test
     @Consumes(MediaType.APPLICATION_JSON)
-    public void banCustomerWithoutAuthorization(@ArquillianResteasyResource CustomerResource customerResource)
-    {
-//        Given
+    public void banCustomerWithoutAuthorization(@ArquillianResteasyResource CustomerResource customerResource) {
+        //        Given
         expectedException.expect(NotAuthorizedException.class);
 
-//        When
+        //        When
         customerResource.banCustomer(1L);
     }
 
     @Test
     @Consumes(MediaType.APPLICATION_JSON)
-    public void banCustomerWithoutAuthorizationRaw(@ArquillianResteasyResource WebTarget webTarget)
-    {
+    public void banCustomerWithoutAuthorizationRaw(@ArquillianResteasyResource WebTarget webTarget) {
         //        Given
 
         //        When
@@ -208,26 +204,29 @@ public class RestClientTestCase {
     }
 
     /**
-     * CustomerResource.createCustomer is annotated with @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML}).
-     * This means that injected proxy by default will use first mime type which in this case is JSON. To force proxy to use XML we annotate
+     * CustomerResource.createCustomer is annotated with @Produces({MediaType.APPLICATION_JSON,
+     * MediaType.APPLICATION_XML}).
+     * This means that injected proxy by default will use first mime type which in this case is JSON. To force proxy to
+     * use XML we annotate
      * test method with @Produces(MediaType.APPLICATION_XML).
      * Arquillian scanns all CustomerResource methods and substitutes annotations with those from this test method.
-     * CustomerResource is annotated also with @POST and @Path which will remain, because they don't exist on this test method.
+     * CustomerResource is annotated also with @POST and @Path which will remain, because they don't exist on this test
+     * method.
      *
-     * @param customerResource configured resource ready for use, injected by Arquillian
+     * @param customerResource
+     *     configured resource ready for use, injected by Arquillian
      */
     @Test
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_XML)
-    public void createCustomer(@ArquillianResteasyResource CustomerResource customerResource)
-    {
-//        Given
+    public void createCustomer(@ArquillianResteasyResource CustomerResource customerResource) {
+        //        Given
         final String name = "Jack";
 
-//        When
+        //        When
         final Customer result = customerResource.createCustomer(new Customer(name));
 
-//        Then
+        //        Then
         assertNotNull(result);
         assertNotNull(result.getId());
         assertEquals(name, result.getName());
@@ -236,14 +235,15 @@ public class RestClientTestCase {
     /**
      * We can inject either proxy or a WebTarget for low level manipulations and assertions.
      *
-     * @param webTarget configured resource ready for use, injected by Arquillian
+     * @param webTarget
+     *     configured resource ready for use, injected by Arquillian
      */
     @Test
-    public void createCustomerBareJAXRSResource(@ArquillianResteasyResource("rest/customer") JerseyWebTarget webTarget)
-    {
+    public void createCustomerBareJAXRSResource(@ArquillianResteasyResource("rest/customer") JerseyWebTarget webTarget) {
         //        Given
         final Invocation.Builder invocationBuilder = webTarget.request();
-        final Invocation invocation = invocationBuilder.buildPost(Entity.entity(new Customer(), MediaType.APPLICATION_JSON_TYPE));
+        final Invocation invocation =
+            invocationBuilder.buildPost(Entity.entity(new Customer(), MediaType.APPLICATION_JSON_TYPE));
 
         //        When
         final Response response = invocation.invoke();
@@ -257,15 +257,16 @@ public class RestClientTestCase {
     /**
      * We can inject either proxy or a JerseyWebTarget for low level manipulations and assertions.
      *
-     * @param webTarget configured resource ready for use, injected by Arquillian
+     * @param webTarget
+     *     configured resource ready for use, injected by Arquillian
      */
     @Test
-    public void createCustomerBareResource(@ArquillianResteasyResource("rest/customer") JerseyWebTarget webTarget)
-    {
+    public void createCustomerBareResource(@ArquillianResteasyResource("rest/customer") JerseyWebTarget webTarget) {
         //        Given
         final Invocation.Builder invocationBuilder = webTarget.request();
         invocationBuilder.accept(MediaType.APPLICATION_JSON);
-        final Invocation invocation = invocationBuilder.buildPost(Entity.entity(new Customer(), MediaType.APPLICATION_JSON_TYPE));
+        final Invocation invocation =
+            invocationBuilder.buildPost(Entity.entity(new Customer(), MediaType.APPLICATION_JSON_TYPE));
 
         //        When
         final Response response = invocation.invoke();
@@ -279,18 +280,18 @@ public class RestClientTestCase {
     /**
      * Totally manually created RestEasy client. This test shows what crazy thing you can do manually with ClassModifier.
      *
-     * @throws Exception well, test may throw exceptions from time to time
+     * @throws Exception
+     *     well, test may throw exceptions from time to time
      */
     @Test
-    public void manualClassModifierUsage() throws Exception
-    {
+    public void manualClassModifierUsage() throws Exception {
         @Consumes(MediaType.APPLICATION_JSON)
-        @Produces(MediaType.APPLICATION_XML)
-        class A {
+        @Produces(MediaType.APPLICATION_XML) class A {
 
         }
-        final Class<CustomerResource> aClass = ClassModifier.getModifiedClass(CustomerResource.class, A.class.getAnnotations());
-//        Given
+        final Class<CustomerResource> aClass =
+            ClassModifier.getModifiedClass(CustomerResource.class, A.class.getAnnotations());
+        //        Given
         final String name = "Jack";
         final Customer customer = new Customer(name);
         Client client = JerseyClientBuilder.newClient();
@@ -298,10 +299,10 @@ public class RestClientTestCase {
         JerseyWebTarget jerseyWebTarget = (JerseyWebTarget) webTarget;
         final CustomerResource customerResource = WebResourceFactory.newResource(aClass, jerseyWebTarget);
 
-//        When
+        //        When
         final Customer result = customerResource.createCustomer(customer);
 
-//        Then
+        //        Then
         assertNotNull(result);
         assertNotNull(result.getId());
         assertEquals(name, result.getName());

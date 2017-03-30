@@ -35,7 +35,7 @@ import static org.jboss.arquillian.extension.rest.warp.impl.cxf.interceptor.CxfC
  * CXF interceptor. This class implements {@link RequestHandler} and {@link ResponseHandler} in order to capture the
  * execution state within the server. <p/> Implementation captures the state and stores it the {@link RestContext} which
  * is being bound to executing request.
- *
+ * <p>
  * <p><strong>Thread-safety:</strong>This class can be considered as a thread safe. The class is mutable, but since it's
  * using {@link ThreadLocal} field for storing it's context it can be considered as a thread safe.</p>
  *
@@ -58,9 +58,9 @@ public class WarpCxfInterceptor implements RequestHandler, ResponseHandler {
 
         // captures the request message
         buildContext(messageContext.getHttpServletRequest())
-                .setMessageContext(messageContext)
-                .setRequestMessage(message)
-                .build();
+            .setMessageContext(messageContext)
+            .setRequestMessage(message)
+            .build();
 
         // returns null, indicating that the request should be proceeded
         return null;
@@ -74,10 +74,10 @@ public class WarpCxfInterceptor implements RequestHandler, ResponseHandler {
 
         // sets the response
         buildContext(messageContext.getHttpServletRequest())
-                .setMessageContext(messageContext)
-                .setResponseMessage(message)
-                .setResponse(response)
-                .build();
+            .setMessageContext(messageContext)
+            .setResponseMessage(message)
+            .setResponse(response)
+            .build();
 
         // returns null, indicating that the request should be proceeded
         return null;

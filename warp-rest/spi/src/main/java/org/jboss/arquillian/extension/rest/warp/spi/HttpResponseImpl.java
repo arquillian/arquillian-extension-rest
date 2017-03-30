@@ -66,7 +66,8 @@ public class HttpResponseImpl implements HttpResponse {
     /**
      * Sets the status code.
      *
-     * @param statusCode the status code
+     * @param statusCode
+     *     the status code
      */
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
@@ -83,7 +84,8 @@ public class HttpResponseImpl implements HttpResponse {
     /**
      * Sets the content type.
      *
-     * @param contentType the content type
+     * @param contentType
+     *     the content type
      */
     public void setContentType(String contentType) {
         this.contentType = contentType;
@@ -100,7 +102,8 @@ public class HttpResponseImpl implements HttpResponse {
     /**
      * Sets the response entity.
      *
-     * @param entity the response entity
+     * @param entity
+     *     the response entity
      */
     public void setEntity(Object entity) {
         this.entity = entity;
@@ -117,7 +120,8 @@ public class HttpResponseImpl implements HttpResponse {
     /**
      * Sets the http headers.
      *
-     * @param headers the http headers
+     * @param headers
+     *     the http headers
      */
     public void setHeaders(MultivaluedMap<String, Object> headers) {
         this.headers = headers;

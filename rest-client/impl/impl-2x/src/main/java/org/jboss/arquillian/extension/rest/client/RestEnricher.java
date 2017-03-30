@@ -40,12 +40,13 @@ import java.util.Map;
 public class RestEnricher extends BaseRestEnricher implements TestEnricher {
 
     @Override
-    protected Object enrichByType(Class<?> clazz, Method method, ArquillianResteasyResource annotation, Consumes consumes, Produces produces)
-    {
+    protected Object enrichByType(Class<?> clazz, Method method, ArquillianResteasyResource annotation, Consumes consumes,
+        Produces produces) {
         Object value;
         final String resourcePath = annotation.value();
         if (ClientRequest.class.isAssignableFrom(clazz)) {
-            final ClientRequest clientRequest = new ClientRequestFactory(getBaseURL()).createRelativeRequest(resourcePath);
+            final ClientRequest clientRequest =
+                new ClientRequestFactory(getBaseURL()).createRelativeRequest(resourcePath);
             final Map<String, String> headers = getHeaders(clazz, method);
             if (!headers.isEmpty()) {
                 clientRequest.registerInterceptor(new HeaderFilter(headers));
@@ -55,8 +56,9 @@ public class RestEnricher extends BaseRestEnricher implements TestEnricher {
             final Class<?> parameterType;
             try {
                 final Annotation[] methodDeclaredAnnotations = method.getDeclaredAnnotations();
-//                                This is test method so if it only contains @Test annotation then we don't need to hassel with substitutions
-                parameterType = methodDeclaredAnnotations.length <= 1 ? clazz : ClassModifier.getModifiedClass(clazz, methodDeclaredAnnotations);
+                //                                This is test method so if it only contains @Test annotation then we don't need to hassel with substitutions
+                parameterType = methodDeclaredAnnotations.length <= 1 ? clazz
+                    : ClassModifier.getModifiedClass(clazz, methodDeclaredAnnotations);
             } catch (Exception e) {
                 throw new RuntimeException("Cannot substitute annotations for method " + method.getName(), e);
             }
@@ -65,8 +67,7 @@ public class RestEnricher extends BaseRestEnricher implements TestEnricher {
             if (!headers.isEmpty()) {
                 proxyBuilder.executor(new ApacheHttpClient4Executor() {
                     @Override
-                    public ClientResponse execute(ClientRequest request) throws Exception
-                    {
+                    public ClientResponse execute(ClientRequest request) throws Exception {
                         for (Map.Entry<String, String> entry : headers.entrySet()) {
                             request.header(entry.getKey(), entry.getValue());
                         }
@@ -86,8 +87,7 @@ public class RestEnricher extends BaseRestEnricher implements TestEnricher {
     }
 
     @Override
-    protected boolean isSupportedParameter(Class<?> clazz)
-    {
+    protected boolean isSupportedParameter(Class<?> clazz) {
         return true;  //proxy based, as a result always supported
     }
 }

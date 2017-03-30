@@ -10,14 +10,12 @@ public class HeaderFilter implements ClientExecutionInterceptor {
 
     private final Map<String, String> headers;
 
-    public HeaderFilter(Map<String, String> headers)
-    {
+    public HeaderFilter(Map<String, String> headers) {
         this.headers = headers;
     }
 
     @Override
-    public ClientResponse execute(ClientExecutionContext ctx) throws Exception
-    {
+    public ClientResponse execute(ClientExecutionContext ctx) throws Exception {
         for (Map.Entry<String, String> entry : headers.entrySet()) {
             ctx.getRequest().header(entry.getKey(), entry.getValue());
         }

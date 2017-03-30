@@ -16,13 +16,12 @@ import java.io.IOException;
 public class SecurityFilter implements Filter {
 
     @Override
-    public void destroy()
-    {
+    public void destroy() {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException
-    {
+    public void doFilter(ServletRequest request, ServletResponse servletResponse, FilterChain filterChain)
+        throws IOException, ServletException {
         final HttpServletRequest httpRequest = (HttpServletRequest) request;
         if (HttpMethod.POST.equals(httpRequest.getMethod()) && httpRequest.getPathInfo().matches("/customer/\\d+")) {
             final String authorization = httpRequest.getHeader("Authorization");
@@ -35,7 +34,6 @@ public class SecurityFilter implements Filter {
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException
-    {
+    public void init(FilterConfig filterConfig) throws ServletException {
     }
 }

@@ -61,10 +61,10 @@ public class RestContextProvider implements ResourceProvider {
         // retrieves the rest context as a attribute from request
         RestContext restContext = (RestContext) request.getAttribute(WarpRestCommons.WARP_REST_ATTRIBUTE);
 
-        if(restContext == null) {
+        if (restContext == null) {
 
             throw new RestContextNotFoundException("The instance of RestContext can not be lookup."
-                    + " Please check whether you had correctly configured interceptors");
+                + " Please check whether you had correctly configured interceptors");
         }
 
         return restContext;

@@ -56,7 +56,8 @@ public class SecurityContextImpl implements SecurityContext {
     /**
      * Sets the principal
      *
-     * @param principal the principal
+     * @param principal
+     *     the principal
      */
     public void setPrincipal(Principal principal) {
         this.principal = principal;
@@ -73,7 +74,8 @@ public class SecurityContextImpl implements SecurityContext {
     /**
      * Sets the authentication scheme.
      *
-     * @param authenticationScheme the authentication scheme
+     * @param authenticationScheme
+     *     the authentication scheme
      */
     public void setAuthenticationScheme(String authenticationScheme) {
         this.authenticationScheme = authenticationScheme;

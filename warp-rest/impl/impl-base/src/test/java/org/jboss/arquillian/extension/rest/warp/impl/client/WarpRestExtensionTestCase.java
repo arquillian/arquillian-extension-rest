@@ -81,13 +81,14 @@ public class WarpRestExtensionTestCase extends AbstractTestTestBase {
 
         bind(ApplicationScoped.class, ServiceLoader.class, serviceLoader);
         when(serviceLoader.all(WarpRestInterceptorEnricher.class))
-                .thenReturn(Collections.singleton(interceptorEnricher));
+            .thenReturn(Collections.singleton(interceptorEnricher));
     }
 
     /**
      * Registers extensions.
      *
-     * @param extensions the list of extensions
+     * @param extensions
+     *     the list of extensions
      */
     @Override
     protected void addExtensions(List<Class<?>> extensions) {

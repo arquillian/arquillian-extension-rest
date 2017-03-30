@@ -69,7 +69,8 @@ public class RestContextImpl implements RestContext {
     /**
      * Sets the http request.
      *
-     * @param httpRequest the http request
+     * @param httpRequest
+     *     the http request
      */
     public void setHttpRequest(HttpRequest httpRequest) {
         this.httpRequest = httpRequest;
@@ -86,7 +87,8 @@ public class RestContextImpl implements RestContext {
     /**
      * Sets the http request
      *
-     * @param httpResponse the http request
+     * @param httpResponse
+     *     the http request
      */
     public void setHttpResponse(HttpResponse httpResponse) {
         this.httpResponse = httpResponse;
@@ -103,7 +105,8 @@ public class RestContextImpl implements RestContext {
     /**
      * Sets the response.
      *
-     * @param response the response
+     * @param response
+     *     the response
      */
     public void setResponse(Response response) {
         this.response = response;
@@ -120,7 +123,8 @@ public class RestContextImpl implements RestContext {
     /**
      * Sets the security context.
      *
-     * @param securityContext the security context
+     * @param securityContext
+     *     the security context
      */
     public void setSecurityContext(SecurityContext securityContext) {
         this.securityContext = securityContext;

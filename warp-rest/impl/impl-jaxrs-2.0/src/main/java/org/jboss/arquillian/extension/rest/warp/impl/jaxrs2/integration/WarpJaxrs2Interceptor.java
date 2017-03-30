@@ -24,7 +24,7 @@ import static org.jboss.arquillian.extension.rest.warp.impl.jaxrs2.integration.J
  * Implementation captures the state and stores it the {@link org.jboss.arquillian.extension.rest.warp.api.RestContext}
  * which is being bound to
  * executing request.
- *
+ * <p>
  * <p><strong>Thread-safety:</strong>This class can be considered as a thread safe. The class is mutable, but since
  * it's using {@link ThreadLocal} field for storing it's context it can be considered as a thread safe.</p>
  *
@@ -32,7 +32,7 @@ import static org.jboss.arquillian.extension.rest.warp.impl.jaxrs2.integration.J
  */
 @Provider
 public class WarpJaxrs2Interceptor implements ContainerRequestFilter, ContainerResponseFilter, ReaderInterceptor,
-        WriterInterceptor {
+    WriterInterceptor {
 
     /**
      * {@inheritDoc}
@@ -42,36 +42,38 @@ public class WarpJaxrs2Interceptor implements ContainerRequestFilter, ContainerR
 
         // captures the request
         buildContext(containerRequestContext)
-                .setContainerRequestContext(containerRequestContext)
-                .build();
+            .setContainerRequestContext(containerRequestContext)
+            .build();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void filter(ContainerRequestContext containerRequestContext, ContainerResponseContext containerResponseContext) throws IOException {
+    public void filter(ContainerRequestContext containerRequestContext, ContainerResponseContext containerResponseContext)
+        throws IOException {
 
         // captures the response
         buildContext(containerRequestContext)
-                .setContainerRequestContext(containerRequestContext)
-                .setContainerResponseContext(containerResponseContext)
-                .build();
+            .setContainerRequestContext(containerRequestContext)
+            .setContainerResponseContext(containerResponseContext)
+            .build();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Object aroundReadFrom(ReaderInterceptorContext readerInterceptorContext) throws IOException, WebApplicationException {
+    public Object aroundReadFrom(ReaderInterceptorContext readerInterceptorContext)
+        throws IOException, WebApplicationException {
 
         // reads the request entity
         Object requestEntity = readerInterceptorContext.proceed();
 
         // stores the unmarshalled object
         buildContext(readerInterceptorContext)
-                .setRequestEntity(requestEntity)
-                .build();
+            .setRequestEntity(requestEntity)
+            .build();
 
         return requestEntity;
     }
@@ -80,14 +82,15 @@ public class WarpJaxrs2Interceptor implements ContainerRequestFilter, ContainerR
      * {@inheritDoc}
      */
     @Override
-    public void aroundWriteTo(WriterInterceptorContext writerInterceptorContext) throws IOException, WebApplicationException {
+    public void aroundWriteTo(WriterInterceptorContext writerInterceptorContext)
+        throws IOException, WebApplicationException {
 
         // proceeds with the context invocation
         writerInterceptorContext.proceed();
 
         // captures the response entity
         buildContext(writerInterceptorContext)
-                .setResponseEntity(writerInterceptorContext.getEntity())
-                .build();
+            .setResponseEntity(writerInterceptorContext.getEntity())
+            .build();
     }
 }

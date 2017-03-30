@@ -39,8 +39,8 @@ import java.util.Map;
 public class RestEnricher extends BaseRestEnricher implements TestEnricher {
 
     @Override
-    protected Object enrichByType(Class<?> clazz, Method method, ArquillianResteasyResource annotation, Consumes consumes, Produces produces)
-    {
+    protected Object enrichByType(Class<?> clazz, Method method, ArquillianResteasyResource annotation, Consumes consumes,
+        Produces produces) {
         Object value;
         Client client = ResteasyClientBuilder.newClient();
         WebTarget webTarget = client.target(getBaseURL() + annotation.value());
@@ -55,8 +55,9 @@ public class RestEnricher extends BaseRestEnricher implements TestEnricher {
             final Class<?> parameterType;
             try {
                 final Annotation[] methodDeclaredAnnotations = method.getDeclaredAnnotations();
-//                                This is test method so if it only contains @Test annotation then we don't need to hassel with substitutions
-                parameterType = methodDeclaredAnnotations.length <= 1 ? clazz : ClassModifier.getModifiedClass(clazz, methodDeclaredAnnotations);
+                //                                This is test method so if it only contains @Test annotation then we don't need to hassel with substitutions
+                parameterType = methodDeclaredAnnotations.length <= 1 ? clazz
+                    : ClassModifier.getModifiedClass(clazz, methodDeclaredAnnotations);
             } catch (Exception e) {
                 throw new RuntimeException("Cannot substitute annotations for method " + method.getName(), e);
             }
@@ -73,8 +74,7 @@ public class RestEnricher extends BaseRestEnricher implements TestEnricher {
     }
 
     @Override
-    protected boolean isSupportedParameter(Class<?> clazz)
-    {
+    protected boolean isSupportedParameter(Class<?> clazz) {
         return true; // it's proxy based, exception will be thrown when proxying.
     }
 }

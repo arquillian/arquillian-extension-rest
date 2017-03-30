@@ -43,11 +43,11 @@ final class Deployments {
         File[] libs = loadLibraries();
 
         return ShrinkWrap.create(WebArchive.class)
-                .addClasses(StockApplication.class, Stock.class, StockService.class, StockServiceResource.class)
-                .addAsWebInfResource("WEB-INF/web.xml")
-                .addAsWebResource("restclient.jsp")
-                .addAsWebResource("js/jquery-1.8.2.min.js", "js/jquery-1.8.2.min.js")
-                .addAsLibraries(libs);
+            .addClasses(StockApplication.class, Stock.class, StockService.class, StockServiceResource.class)
+            .addAsWebInfResource("WEB-INF/web.xml")
+            .addAsWebResource("restclient.jsp")
+            .addAsWebResource("js/jquery-1.8.2.min.js", "js/jquery-1.8.2.min.js")
+            .addAsLibraries(libs);
     }
 
     /**
@@ -57,8 +57,9 @@ final class Deployments {
      */
     private static File[] loadLibraries() {
         return Maven.resolver().loadPomFromFile("pom.xml")
-                .resolve("org.apache.cxf:cxf-rt-frontend-jaxrs","org.apache.cxf:cxf-rt-rs-extension-providers","org.codehaus.jettison:jettison")
-                .withTransitivity()
-                .asFile();
+            .resolve("org.apache.cxf:cxf-rt-frontend-jaxrs", "org.apache.cxf:cxf-rt-rs-extension-providers",
+                "org.codehaus.jettison:jettison")
+            .withTransitivity()
+            .asFile();
     }
 }

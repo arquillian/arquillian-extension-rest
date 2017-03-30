@@ -95,9 +95,9 @@ public class StockServiceResourceTestCase {
         WebResource webResource = client.resource(contextPath + "rest/stocks");
 
         ClientResponse response = webResource
-                .accept(MediaType.APPLICATION_XML_TYPE)
-                .type(MediaType.APPLICATION_XML_TYPE)
-                .post(ClientResponse.class, createStock());
+            .accept(MediaType.APPLICATION_XML_TYPE)
+            .type(MediaType.APPLICATION_XML_TYPE)
+            .post(ClientResponse.class, createStock());
 
         assertEquals("The request didn't succeeded.", Response.Status.CREATED.getStatusCode(), response.getStatus());
     }
@@ -109,15 +109,15 @@ public class StockServiceResourceTestCase {
         Stock stock = createStock();
 
         client.resource(contextPath + "rest/stocks")
-                .accept(MediaType.APPLICATION_XML_TYPE)
-                .type(MediaType.APPLICATION_XML_TYPE)
-                .post(ClientResponse.class, stock);
+            .accept(MediaType.APPLICATION_XML_TYPE)
+            .type(MediaType.APPLICATION_XML_TYPE)
+            .post(ClientResponse.class, stock);
 
         WebResource webResource = client.resource(contextPath + "rest/stocks/2");
 
         Stock result = webResource
-                .accept(MediaType.APPLICATION_XML_TYPE)
-                .get(Stock.class);
+            .accept(MediaType.APPLICATION_XML_TYPE)
+            .get(Stock.class);
 
         assertEquals("Stock has invalid name.", stock.getName(), result.getName());
         assertEquals("Stock has invalid code.", stock.getCode(), result.getCode());
@@ -131,9 +131,9 @@ public class StockServiceResourceTestCase {
         final Stock stock = createStock();
 
         client.resource(contextPath + "rest/stocks")
-                .accept(MediaType.APPLICATION_XML_TYPE)
-                .type(MediaType.APPLICATION_XML_TYPE)
-                .post(ClientResponse.class, stock);
+            .accept(MediaType.APPLICATION_XML_TYPE)
+            .type(MediaType.APPLICATION_XML_TYPE)
+            .post(ClientResponse.class, stock);
 
         Warp.initiate(new Activity() {
             @Override
@@ -142,8 +142,8 @@ public class StockServiceResourceTestCase {
                 WebResource webResource = client.resource(contextPath + "rest/stocks/2");
 
                 Stock result = webResource
-                        .accept(MediaType.APPLICATION_XML_TYPE)
-                        .get(Stock.class);
+                    .accept(MediaType.APPLICATION_XML_TYPE)
+                    .get(Stock.class);
 
                 assertEquals("Stock has invalid name.", stock.getName(), result.getName());
                 assertEquals("Stock has invalid code.", stock.getCode(), result.getCode());

@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <arquillian xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://jboss.org/schema/arquillian"
-            xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+    xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
 
-    <container qualifier="jbossas7" default="true">
-        <configuration>
-            <property name="jbossHome">target/jboss-as-${jboss.version:7.1.1.Final}</property>
-        </configuration>
-    </container>
+  <container qualifier="jbossas7" default="true">
+    <configuration>
+      <property name="jbossHome">target/jboss-as-${jboss.version:7.1.1.Final}</property>
+    </configuration>
+  </container>
 
-    <container qualifier="tomcat">
-        <configuration>
-            <property name="catalinaHome">${CATALINA_HOME:target/apache-tomcat-7.0.20}</property>
-            <property name="javaVmArguments">-Xmx1024m -XX:MaxPermSize=512m</property>
-            <property name="jmxPort">8089</property>
-            <property name="bindHttpPort">8080</property>
-            <property name="user">tomcat</property>
-            <property name="pass">tomcat</property>
-            <property name="serverConfig">server.xml</property>
-        </configuration>
-    </container>
+  <container qualifier="tomcat">
+    <configuration>
+      <property name="catalinaHome">${CATALINA_HOME:target/apache-tomcat-7.0.20}</property>
+      <property name="javaVmArguments">-Xmx1024m -XX:MaxPermSize=512m</property>
+      <property name="jmxPort">8089</property>
+      <property name="bindHttpPort">8080</property>
+      <property name="user">tomcat</property>
+      <property name="pass">tomcat</property>
+      <property name="serverConfig">server.xml</property>
+    </configuration>
+  </container>
 
 </arquillian>

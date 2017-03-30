@@ -38,8 +38,7 @@ import java.util.Map;
 public class RestEnricher extends BaseRestEnricher implements TestEnricher {
 
     @Override
-    protected boolean isSupportedParameter(Class<?> clazz)
-    {
+    protected boolean isSupportedParameter(Class<?> clazz) {
         if (ClientBuilder.class.isAssignableFrom(clazz)) {
             return true;
         } else if (Client.class.isAssignableFrom(clazz)) {
@@ -52,8 +51,8 @@ public class RestEnricher extends BaseRestEnricher implements TestEnricher {
     }
 
     @Override
-    protected Object enrichByType(Class<?> clazz, Method method, ArquillianResteasyResource annotation, Consumes consumes, Produces produces)
-    {
+    protected Object enrichByType(Class<?> clazz, Method method, ArquillianResteasyResource annotation, Consumes consumes,
+        Produces produces) {
         Object result = null;
         if (ClientBuilder.class.isAssignableFrom(clazz)) {
             result = ClientBuilder.newBuilder();

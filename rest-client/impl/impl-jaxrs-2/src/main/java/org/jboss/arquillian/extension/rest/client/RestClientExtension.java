@@ -29,8 +29,7 @@ import org.jboss.arquillian.test.spi.TestEnricher;
 public class RestClientExtension implements LoadableExtension {
 
     @Override
-    public void register(ExtensionBuilder builder)
-    {
+    public void register(ExtensionBuilder builder) {
         builder.service(TestEnricher.class, RestEnricher.class);
     }
 }

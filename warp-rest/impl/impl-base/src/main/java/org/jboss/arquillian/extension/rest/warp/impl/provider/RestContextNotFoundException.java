@@ -29,7 +29,8 @@ public class RestContextNotFoundException extends RuntimeException {
     /**
      * Creates new instance of {@link RestContextNotFoundException} exception with detailed error message.
      *
-     * @param message the detailed error message
+     * @param message
+     *     the detailed error message
      */
     public RestContextNotFoundException(String message) {
         super(message);
@@ -39,8 +40,10 @@ public class RestContextNotFoundException extends RuntimeException {
      * Creates new instance of {@link RestContextNotFoundException} exception with detailed error message and inner
      * cause.
      *
-     * @param message the detailed error message
-     * @param cause   the inner cause
+     * @param message
+     *     the detailed error message
+     * @param cause
+     *     the inner cause
      */
     public RestContextNotFoundException(String message, Throwable cause) {
         super(message, cause);

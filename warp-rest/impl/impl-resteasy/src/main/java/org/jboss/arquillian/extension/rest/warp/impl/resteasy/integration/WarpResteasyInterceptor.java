@@ -45,7 +45,7 @@ import static org.jboss.arquillian.extension.rest.warp.impl.resteasy.integration
  * <p/>
  * Implementation captures the state and stores it the {@link RestContext} which is being bound to
  * executing request.
- *
+ * <p>
  * <p><strong>Thread-safety:</strong>This class can be considered as a thread safe. The class is mutable, but since
  * it's using {@link ThreadLocal} field for storing it's context it can be considered as a thread safe.</p>
  *
@@ -54,7 +54,7 @@ import static org.jboss.arquillian.extension.rest.warp.impl.resteasy.integration
 @Provider
 @ServerInterceptor
 public class WarpResteasyInterceptor implements PreProcessInterceptor, PostProcessInterceptor,
-        MessageBodyReaderInterceptor, MessageBodyWriterInterceptor {
+    MessageBodyReaderInterceptor, MessageBodyWriterInterceptor {
 
     /**
      * Stores the http request within the worker thread.
@@ -69,7 +69,8 @@ public class WarpResteasyInterceptor implements PreProcessInterceptor, PostProce
     /**
      * Sets the security context.
      *
-     * @param securityContext the security context
+     * @param securityContext
+     *     the security context
      */
     @Context
     public void setSecurityContext(SecurityContext securityContext) {
@@ -81,15 +82,16 @@ public class WarpResteasyInterceptor implements PreProcessInterceptor, PostProce
      * {@inheritDoc}
      */
     @Override
-    public ServerResponse preProcess(HttpRequest httpRequest, ResourceMethod resourceMethod) throws Failure, WebApplicationException {
+    public ServerResponse preProcess(HttpRequest httpRequest, ResourceMethod resourceMethod)
+        throws Failure, WebApplicationException {
 
         // stores the http request
         request.set(httpRequest);
 
         // initialize the context
         buildContext(request.get())
-                .setSecurityContext(securityContext.get())
-                .build();
+            .setSecurityContext(securityContext.get())
+            .build();
 
         // returns null, does not overrides the original server response
         return null;
@@ -106,8 +108,8 @@ public class WarpResteasyInterceptor implements PreProcessInterceptor, PostProce
 
         // appends the entity to the context
         buildContext(request.get())
-                .setRequestEntity(result)
-                .build();
+            .setRequestEntity(result)
+            .build();
 
         // returns the entity for farther processing
         return result;
@@ -121,9 +123,9 @@ public class WarpResteasyInterceptor implements PreProcessInterceptor, PostProce
 
         // captures the server response
         buildContext(request.get())
-                .setServerResponse(serverResponse)
-                .setSecurityContext(securityContext.get())
-                .build();
+            .setServerResponse(serverResponse)
+            .setSecurityContext(securityContext.get())
+            .build();
     }
 
     /**
@@ -137,7 +139,7 @@ public class WarpResteasyInterceptor implements PreProcessInterceptor, PostProce
 
         // retrieves the response content type
         buildContext(request.get())
-                .setResponseMediaType(context.getMediaType())
-                .build();
+            .setResponseMediaType(context.getMediaType())
+            .build();
     }
 }

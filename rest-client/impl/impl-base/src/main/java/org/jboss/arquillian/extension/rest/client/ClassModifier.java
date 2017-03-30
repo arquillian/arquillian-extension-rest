@@ -50,13 +50,12 @@ public final class ClassModifier {
 
     private static final LongHolder COUNTER = new LongHolder();
 
-    private ClassModifier()
-    {
+    private ClassModifier() {
     }
 
-    private static void addNewAnnotations(Annotation[] add, CtMethod method, ConstPool constpool, ClassPool classPool, AnnotationsAttribute attr)
-        throws IllegalAccessException, NotFoundException, InvocationTargetException
-    {
+    private static void addNewAnnotations(Annotation[] add, CtMethod method, ConstPool constpool, ClassPool classPool,
+        AnnotationsAttribute attr)
+        throws IllegalAccessException, NotFoundException, InvocationTargetException {
         if (null == attr) {
             attr = new AnnotationsAttribute(constpool, AnnotationsAttribute.visibleTag);
             method.getMethodInfo().addAttribute(attr);
@@ -66,14 +65,14 @@ public final class ClassModifier {
         }
     }
 
-    private static AnnotationsAttribute filterExistingAnnotations(Annotation[] remove, CtMethod method)
-    {
+    private static AnnotationsAttribute filterExistingAnnotations(Annotation[] remove, CtMethod method) {
         AnnotationsAttribute attr = null;
         final List attributes = method.getMethodInfo().getAttributes();
         for (Object attribute : attributes) {
             if (attribute instanceof AnnotationsAttribute) {
                 attr = (AnnotationsAttribute) attribute;
-                final List<javassist.bytecode.annotation.Annotation> annotations = new ArrayList<javassist.bytecode.annotation.Annotation>();
+                final List<javassist.bytecode.annotation.Annotation> annotations =
+                    new ArrayList<javassist.bytecode.annotation.Annotation>();
                 for (javassist.bytecode.annotation.Annotation annotation : attr.getAnnotations()) {
                     boolean shouldRemove = false;
                     for (Annotation annotationToRemove : remove) {
@@ -85,7 +84,8 @@ public final class ClassModifier {
                         annotations.add(annotation);
                     }
                 }
-                attr.setAnnotations(annotations.toArray(new javassist.bytecode.annotation.Annotation[annotations.size()]));
+                attr.setAnnotations(
+                    annotations.toArray(new javassist.bytecode.annotation.Annotation[annotations.size()]));
             }
         }
         return attr;
@@ -93,8 +93,7 @@ public final class ClassModifier {
 
     @SuppressWarnings("unchecked")
     public static <T> Class<T> getModifiedClass(Class<T> clazz, Annotation[] add)
-        throws javassist.NotFoundException, CannotCompileException, InvocationTargetException, IllegalAccessException
-    {
+        throws javassist.NotFoundException, CannotCompileException, InvocationTargetException, IllegalAccessException {
         ClassPool pool = ClassPool.getDefault();
         CtClass cc = pool.get(clazz.getCanonicalName());
         for (CtMethod method : cc.getDeclaredMethods()) {
@@ -109,8 +108,7 @@ public final class ClassModifier {
         return cc.toClass();
     }
 
-    private static CtClass getType(Object value, Class<?> valueType, ClassPool classPool) throws NotFoundException
-    {
+    private static CtClass getType(Object value, Class<?> valueType, ClassPool classPool) throws NotFoundException {
         if (value instanceof Boolean) {
             return CtClass.booleanType;
         } else if (value instanceof Byte) {
@@ -136,9 +134,9 @@ public final class ClassModifier {
         }
     }
 
-    private static javassist.bytecode.annotation.Annotation toJavassist(Annotation annotation, ConstPool constpool, ClassPool classPool)
-        throws NotFoundException, InvocationTargetException, IllegalAccessException
-    {
+    private static javassist.bytecode.annotation.Annotation toJavassist(Annotation annotation, ConstPool constpool,
+        ClassPool classPool)
+        throws NotFoundException, InvocationTargetException, IllegalAccessException {
         final javassist.bytecode.annotation.Annotation newAnnotation = new javassist.bytecode.annotation.Annotation(
             annotation.annotationType().getCanonicalName(), constpool);
         for (Method method : annotation.annotationType().getDeclaredMethods()) {
@@ -152,8 +150,8 @@ public final class ClassModifier {
         return newAnnotation;
     }
 
-    private static MemberValue toMemberValue(Object value, Class<?> componentType, ConstPool constpool, ClassPool classPool) throws NotFoundException
-    {
+    private static MemberValue toMemberValue(Object value, Class<?> componentType, ConstPool constpool,
+        ClassPool classPool) throws NotFoundException {
         final CtClass type = getType(value, componentType, classPool);
         final MemberValue memberValue = javassist.bytecode.annotation.Annotation.createMemberValue(constpool, type);
         if (memberValue instanceof BooleanMemberValue) {
@@ -177,12 +175,15 @@ public final class ClassModifier {
         } else if (memberValue instanceof StringMemberValue) {
             ((StringMemberValue) memberValue).setValue((String) value);
         } else if (type.isArray()) {
-            ((ArrayMemberValue) memberValue).setValue(toMemberValue((Object[]) value, componentType, constpool, classPool));
+            ((ArrayMemberValue) memberValue).setValue(
+                toMemberValue((Object[]) value, componentType, constpool, classPool));
         } else if (type.isInterface()) {
-            final javassist.bytecode.annotation.Annotation annotation = new javassist.bytecode.annotation.Annotation(type.getName(), constpool);
+            final javassist.bytecode.annotation.Annotation annotation =
+                new javassist.bytecode.annotation.Annotation(type.getName(), constpool);
             for (Method method : componentType.getDeclaredMethods()) {
                 try {
-                    annotation.addMemberValue(method.getName(), toMemberValue(method.invoke(value), null, constpool, classPool));
+                    annotation.addMemberValue(method.getName(),
+                        toMemberValue(method.invoke(value), null, constpool, classPool));
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -194,8 +195,8 @@ public final class ClassModifier {
         return memberValue;
     }
 
-    private static MemberValue[] toMemberValue(Object[] value, Class<?> valueType, ConstPool constpool, ClassPool classPool) throws NotFoundException
-    {
+    private static MemberValue[] toMemberValue(Object[] value, Class<?> valueType, ConstPool constpool,
+        ClassPool classPool) throws NotFoundException {
         final MemberValue[] memberValues = new MemberValue[value.length];
         for (int i = 0; i < value.length; i++) {
             memberValues[i] = toMemberValue(value[i], valueType, constpool, classPool);
@@ -207,8 +208,7 @@ public final class ClassModifier {
 
         private Long value = 1L;
 
-        private synchronized long increment()
-        {
+        private synchronized long increment() {
             return value++;
         }
     }

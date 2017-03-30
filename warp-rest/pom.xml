@@ -1,89 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-    <!-- Parent -->
-    <parent>
+  <!-- Parent -->
+  <parent>
+    <groupId>org.jboss.arquillian.extension</groupId>
+    <artifactId>arquillian-rest-parent</artifactId>
+    <version>1.0.0.Final-SNAPSHOT</version>
+    <relativePath>../</relativePath>
+  </parent>
+
+  <!-- Model Version -->
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- Artifact Configuration -->
+  <artifactId>arquillian-rest-warp-parent</artifactId>
+  <packaging>pom</packaging>
+
+  <name>Arquillian Warp REST Extension: Parent</name>
+  <description>Rest support for Arquillian Warp.</description>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <properties>
+
+  </properties>
+
+  <modules>
+    <module>api</module>
+    <module>spi</module>
+    <module>impl</module>
+    <module>bom</module>
+    <module>ftest</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+
+      <dependency>
         <groupId>org.jboss.arquillian.extension</groupId>
-        <artifactId>arquillian-rest-parent</artifactId>
-        <version>1.0.0.Final-SNAPSHOT</version>
-        <relativePath>../</relativePath>
-    </parent>
+        <artifactId>arquillian-rest-warp-api</artifactId>
+        <version>${project.version}</version>
+      </dependency>
 
-    <!-- Model Version -->
-    <modelVersion>4.0.0</modelVersion>
+      <dependency>
+        <groupId>org.jboss.arquillian.extension</groupId>
+        <artifactId>arquillian-rest-warp-impl-base</artifactId>
+        <version>${project.version}</version>
+      </dependency>
 
-    <!-- Artifact Configuration -->
-    <artifactId>arquillian-rest-warp-parent</artifactId>
-    <packaging>pom</packaging>
+      <dependency>
+        <groupId>org.jboss.arquillian.extension</groupId>
+        <artifactId>arquillian-rest-warp-spi</artifactId>
+        <version>${project.version}</version>
+      </dependency>
 
-    <name>Arquillian Warp REST Extension: Parent</name>
-    <description>Rest support for Arquillian Warp.</description>
+      <dependency>
+        <groupId>org.jboss.arquillian.extension</groupId>
+        <artifactId>arquillian-rest-warp-impl-resteasy</artifactId>
+        <version>${project.version}</version>
+      </dependency>
 
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
+      <dependency>
+        <groupId>org.jboss.arquillian.extension</groupId>
+        <artifactId>arquillian-rest-warp-impl-jersey</artifactId>
+        <version>${project.version}</version>
+      </dependency>
 
-    <properties>
+      <dependency>
+        <groupId>org.jboss.arquillian.extension</groupId>
+        <artifactId>arquillian-rest-warp-impl-cxf</artifactId>
+        <version>${project.version}</version>
+      </dependency>
 
-    </properties>
+      <dependency>
+        <groupId>org.jboss.arquillian.extension</groupId>
+        <artifactId>arquillian-rest-warp-impl-jaxrs-2.0</artifactId>
+        <version>${project.version}</version>
+      </dependency>
 
-    <modules>
-        <module>api</module>
-        <module>spi</module>
-        <module>impl</module>
-        <module>bom</module>
-        <module>ftest</module>
-    </modules>
-
-    <dependencyManagement>
-        <dependencies>
-
-            <dependency>
-                <groupId>org.jboss.arquillian.extension</groupId>
-                <artifactId>arquillian-rest-warp-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss.arquillian.extension</groupId>
-                <artifactId>arquillian-rest-warp-impl-base</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss.arquillian.extension</groupId>
-                <artifactId>arquillian-rest-warp-spi</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss.arquillian.extension</groupId>
-                <artifactId>arquillian-rest-warp-impl-resteasy</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss.arquillian.extension</groupId>
-                <artifactId>arquillian-rest-warp-impl-jersey</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss.arquillian.extension</groupId>
-                <artifactId>arquillian-rest-warp-impl-cxf</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss.arquillian.extension</groupId>
-                <artifactId>arquillian-rest-warp-impl-jaxrs-2.0</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-        </dependencies>
-    </dependencyManagement>
+    </dependencies>
+  </dependencyManagement>
 
 </project>

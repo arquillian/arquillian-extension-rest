@@ -42,7 +42,7 @@ import java.util.Map;
 
 /**
  * The Jersey specific {@link RestContext} builder.
- *
+ * <p>
  * <p><strong>Thread-safety:</strong>This class is mutable and not thread safe.</p>
  *
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
@@ -77,9 +77,11 @@ final class JerseyContextBuilder implements RestContextBuilder {
     /**
      * Creates new instance of {@link JerseyContextBuilder} class.
      *
-     * @param servletRequest the servlet request
+     * @param servletRequest
+     *     the servlet request
      *
-     * @throws IllegalArgumentException if servlet request is null
+     * @throws IllegalArgumentException
+     *     if servlet request is null
      */
     private JerseyContextBuilder(ServletRequest servletRequest) {
         Validate.notNull(servletRequest, "The 'servletRequest' can not be null.");
@@ -91,11 +93,13 @@ final class JerseyContextBuilder implements RestContextBuilder {
     /**
      * The utility method that creates new instance of {@link JerseyContextBuilder}.
      *
-     * @param servletRequest the servlet request
+     * @param servletRequest
+     *     the servlet request
      *
      * @return the created builder instance
      *
-     * @throws IllegalArgumentException if servletRequest is null
+     * @throws IllegalArgumentException
+     *     if servletRequest is null
      */
     public static JerseyContextBuilder buildContext(ServletRequest servletRequest) {
 
@@ -105,7 +109,8 @@ final class JerseyContextBuilder implements RestContextBuilder {
     /**
      * Sets the container request.
      *
-     * @param containerRequest the container request
+     * @param containerRequest
+     *     the container request
      *
      * @return the rest context builder
      */
@@ -118,7 +123,8 @@ final class JerseyContextBuilder implements RestContextBuilder {
     /**
      * Sets the container response
      *
-     * @param containerResponse the container response
+     * @param containerResponse
+     *     the container response
      *
      * @return the rest context builder
      */
@@ -187,7 +193,7 @@ final class JerseyContextBuilder implements RestContextBuilder {
 
         SecurityContextImpl securityContext = new SecurityContextImpl();
 
-        if(containerRequest != null) {
+        if (containerRequest != null) {
             securityContext.setPrincipal(containerRequest.getUserPrincipal());
             securityContext.setAuthenticationScheme(containerRequest.getAuthenticationScheme());
         }
@@ -197,7 +203,8 @@ final class JerseyContextBuilder implements RestContextBuilder {
     /**
      * Retrieves the content mime type name.
      *
-     * @param mediaType the content mime type
+     * @param mediaType
+     *     the content mime type
      *
      * @return the content mime type name
      */
@@ -208,7 +215,8 @@ final class JerseyContextBuilder implements RestContextBuilder {
     /**
      * Maps the http method name into correspondng {@link HttpMethod}.
      *
-     * @param methodName the method name
+     * @param methodName
+     *     the method name
      *
      * @return the {@link HttpMethod}
      */
@@ -220,7 +228,8 @@ final class JerseyContextBuilder implements RestContextBuilder {
     /**
      * Returns list of http headers values.
      *
-     * @param values the list of values
+     * @param values
+     *     the list of values
      *
      * @return the list of values
      */
@@ -241,9 +250,9 @@ final class JerseyContextBuilder implements RestContextBuilder {
     private static JerseyContextBuilder getJerseyContextBuilder(ServletRequest servletRequest) {
 
         JerseyContextBuilder jerseyContextBuilder = (JerseyContextBuilder)
-                servletRequest.getAttribute(BUILDER_ATTRIBUTE_NAME);
+            servletRequest.getAttribute(BUILDER_ATTRIBUTE_NAME);
 
-        if(jerseyContextBuilder == null) {
+        if (jerseyContextBuilder == null) {
 
             jerseyContextBuilder = new JerseyContextBuilder(servletRequest);
             servletRequest.setAttribute(BUILDER_ATTRIBUTE_NAME, jerseyContextBuilder);

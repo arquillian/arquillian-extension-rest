@@ -26,11 +26,11 @@ final class Deployments {
         File[] libs = loadLibraries();
 
         return ShrinkWrap.create(WebArchive.class)
-                .addClasses(StockApplication.class, Stock.class, StockService.class, StockServiceResource.class)
-                .addAsWebInfResource("WEB-INF/web.xml")
-                .addAsWebResource("restclient.jsp")
-                .addAsWebResource("js/jquery-1.8.2.min.js", "js/jquery-1.8.2.min.js")
-                .addAsLibraries(libs);
+            .addClasses(StockApplication.class, Stock.class, StockService.class, StockServiceResource.class)
+            .addAsWebInfResource("WEB-INF/web.xml")
+            .addAsWebResource("restclient.jsp")
+            .addAsWebResource("js/jquery-1.8.2.min.js", "js/jquery-1.8.2.min.js")
+            .addAsLibraries(libs);
     }
 
     /**

@@ -46,13 +46,11 @@ public abstract class BaseRestEnricher implements TestEnricher {
     private Instance<Response> responseInst;
 
     @Override
-    public void enrich(Object testCase)
-    {
+    public void enrich(Object testCase) {
     }
 
     @Override
-    public Object[] resolve(Method method)
-    {
+    public Object[] resolve(Method method) {
         Object[] values = new Object[method.getParameterTypes().length];
         Class<?>[] parameterTypes = method.getParameterTypes();
         final Consumes consumes = method.getDeclaringClass().getAnnotation(Consumes.class);
@@ -82,15 +80,13 @@ public abstract class BaseRestEnricher implements TestEnricher {
         return values;
     }
 
-    private void addHeaders(Map<String, String> headersMap, Header annotation)
-    {
+    private void addHeaders(Map<String, String> headersMap, Header annotation) {
         if (null != annotation) {
             headersMap.put(annotation.name(), annotation.value());
         }
     }
 
-    protected boolean allInSameContext(List<Servlet> servlets)
-    {
+    protected boolean allInSameContext(List<Servlet> servlets) {
         Set<String> context = new HashSet<String>();
         for (Servlet servlet : servlets) {
             context.add(servlet.getContextRoot());
@@ -98,11 +94,11 @@ public abstract class BaseRestEnricher implements TestEnricher {
         return context.size() == 1;
     }
 
-    protected abstract Object enrichByType(Class<?> clazz, Method method, ArquillianResteasyResource annotation, Consumes consumes, Produces produces);
+    protected abstract Object enrichByType(Class<?> clazz, Method method, ArquillianResteasyResource annotation,
+        Consumes consumes, Produces produces);
 
     // Currently no way to share @ArquillianResource URL (URLResourceProvider) logic internally, copied logic
-    protected URI getBaseURL()
-    {
+    protected URI getBaseURL() {
         HTTPContext context = metaDataInst.get().getContext(HTTPContext.class);
         if (allInSameContext(context.getServlets())) {
             return context.getServlets().get(0).getBaseURI();
@@ -110,15 +106,13 @@ public abstract class BaseRestEnricher implements TestEnricher {
         throw new IllegalStateException("No baseURL found in HTTPContext");
     }
 
-    protected Map<String, String> getHeaders(Class<?> clazz, Method method)
-    {
+    protected Map<String, String> getHeaders(Class<?> clazz, Method method) {
         final Map<String, String> headers = getHeaders(clazz);
         headers.putAll(getHeaders(method));
         return headers;
     }
 
-    protected Map<String, String> getHeaders(AnnotatedElement annotatedElement)
-    {
+    protected Map<String, String> getHeaders(AnnotatedElement annotatedElement) {
         final Map<String, String> headersMap = new HashMap<String, String>();
         final Headers headersAnnotation = annotatedElement.getAnnotation(Headers.class);
         if (null != headersAnnotation && null != headersAnnotation.value()) {

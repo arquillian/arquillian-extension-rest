@@ -22,7 +22,7 @@ package org.jboss.arquillian.extension.rest.warp.api;
  *
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */
-public enum HttpMethod {
+public enum HttpMethod{
 
     /**
      * HTTP GET method.
@@ -48,4 +48,4 @@ public enum HttpMethod {
      * HTTP HEAD method.
      */
     HEAD
-}
+    }

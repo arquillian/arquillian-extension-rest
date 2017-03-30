@@ -35,7 +35,8 @@ public interface StockService {
     /**
      * Creates new stock.
      *
-     * @param stock the stock to create
+     * @param stock
+     *     the stock to create
      *
      * @return the response
      */
@@ -44,15 +45,18 @@ public interface StockService {
     /**
      * Updates the stock.
      *
-     * @param id    stock id
-     * @param stock the stock to update
+     * @param id
+     *     stock id
+     * @param stock
+     *     the stock to update
      */
     void updateStock(@PathParam("id") long id, Stock stock);
 
     /**
      * Retrieves the stock by it's id.
      *
-     * @param id the stock id
+     * @param id
+     *     the stock id
      *
      * @return the stock that matches the given id
      */
@@ -61,17 +65,21 @@ public interface StockService {
     /**
      * Retrieves the stock list.
      *
-     * @param startIndex the starting index
-     * @param size       the number stocks to retrieve
+     * @param startIndex
+     *     the starting index
+     * @param size
+     *     the number stocks to retrieve
      *
      * @return the list of stocks
      */
-    List<Stock> getStocks(@DefaultValue("0") @QueryParam("startIndex") int startIndex, @DefaultValue("10") @QueryParam("size") int size);
+    List<Stock> getStocks(@DefaultValue("0") @QueryParam("startIndex") int startIndex,
+        @DefaultValue("10") @QueryParam("size") int size);
 
     /**
      * Deletes the stock
      *
-     * @param id the stock id
+     * @param id
+     *     the stock id
      *
      * @return the response
      */

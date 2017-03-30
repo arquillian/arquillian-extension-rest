@@ -34,7 +34,7 @@ import static org.jboss.arquillian.extension.rest.warp.impl.jersey.integration.J
  * to capture the execution state within the server.
  * <p/>
  * Implementation captures the state and stores it the {@link RestContext} which is being bound to executing request.
- *
+ * <p>
  * <p><strong>Thread-safety:</strong>This class can be considered as a thread safe. The class is mutable, but since
  * it's using {@link ThreadLocal} field for storing it's context it can be considered as a thread safe.</p>
  *
@@ -45,7 +45,7 @@ public class WarpJerseyInterceptor implements ContainerRequestFilter, ContainerR
 
     /**
      * Injected {@link HttpServletRequest}.
-     *
+     * <p>
      * Note: according to the jersey spec this should be a thread local copy of the request.
      * Setter injection is not supported, this is the only way to enquire the {@link HttpServletRequest}.
      */
@@ -60,8 +60,8 @@ public class WarpJerseyInterceptor implements ContainerRequestFilter, ContainerR
 
         // stores the container request
         buildContext(request)
-                .setContainerRequest(containerRequest)
-                .build();
+            .setContainerRequest(containerRequest)
+            .build();
 
         // returns the result
         return containerRequest;
@@ -75,9 +75,9 @@ public class WarpJerseyInterceptor implements ContainerRequestFilter, ContainerR
 
         // stores the container request and response
         buildContext(request)
-                .setContainerRequest(containerRequest)
-                .setContainerResponse(containerResponse)
-                .build();
+            .setContainerRequest(containerRequest)
+            .setContainerResponse(containerResponse)
+            .build();
 
         // returns the result
         return containerResponse;

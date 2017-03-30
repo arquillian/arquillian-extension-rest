@@ -38,7 +38,7 @@ import java.util.List;
 
 /**
  * The RestEasy specific {@link RestContext} builder.
- *
+ * <p>
  * <p><strong>Thread-safety:</strong>This class is mutable and not thread safe.</p>
  *
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
@@ -83,9 +83,11 @@ final class ResteasyContextBuilder implements RestContextBuilder {
     /**
      * <p>Creates new instance of {@link ResteasyContextBuilder}.</p>
      *
-     * @param httpRequest the http request
+     * @param httpRequest
+     *     the http request
      *
-     * @throws IllegalArgumentException if httpRequest is null
+     * @throws IllegalArgumentException
+     *     if httpRequest is null
      */
     private ResteasyContextBuilder(org.jboss.resteasy.spi.HttpRequest httpRequest) {
 
@@ -98,11 +100,13 @@ final class ResteasyContextBuilder implements RestContextBuilder {
     /**
      * The utility method that creates new instance of {@link ResteasyContextBuilder}.
      *
-     * @param httpRequest the http request
+     * @param httpRequest
+     *     the http request
      *
      * @return the created builder instance
      *
-     * @throws IllegalArgumentException if servletRequest is null
+     * @throws IllegalArgumentException
+     *     if servletRequest is null
      */
     public static ResteasyContextBuilder buildContext(org.jboss.resteasy.spi.HttpRequest httpRequest) {
 
@@ -112,7 +116,8 @@ final class ResteasyContextBuilder implements RestContextBuilder {
     /**
      * Sets the response content type.
      *
-     * @param responseMediaType the response content type
+     * @param responseMediaType
+     *     the response content type
      *
      * @return the rest context builder
      */
@@ -125,7 +130,8 @@ final class ResteasyContextBuilder implements RestContextBuilder {
     /**
      * Sets the sever response.
      *
-     * @param serverResponse the server response
+     * @param serverResponse
+     *     the server response
      *
      * @return the rest context builder
      */
@@ -138,7 +144,8 @@ final class ResteasyContextBuilder implements RestContextBuilder {
     /**
      * Sets the request entity.
      *
-     * @param entity the request entity
+     * @param entity
+     *     the request entity
      *
      * @return the rest context builder
      */
@@ -151,7 +158,8 @@ final class ResteasyContextBuilder implements RestContextBuilder {
     /**
      * Sets the security context
      *
-     * @param securityContext the security context
+     * @param securityContext
+     *     the security context
      *
      * @return the rest context builder
      */
@@ -225,7 +233,8 @@ final class ResteasyContextBuilder implements RestContextBuilder {
     /**
      * Retrieves the content type or null if it is not set.
      *
-     * @param mediaType the media type
+     * @param mediaType
+     *     the media type
      *
      * @return the content type/mime name
      */
@@ -237,7 +246,8 @@ final class ResteasyContextBuilder implements RestContextBuilder {
     /**
      * Maps the http method name into corresponding {@link HttpMethod}.
      *
-     * @param methodName the http method name
+     * @param methodName
+     *     the http method name
      *
      * @return the {@link HttpMethod}
      */
@@ -249,7 +259,8 @@ final class ResteasyContextBuilder implements RestContextBuilder {
     /**
      * Returns list of http headers values.
      *
-     * @param values the list of values
+     * @param values
+     *     the list of values
      *
      * @return the list of values
      */
@@ -270,7 +281,7 @@ final class ResteasyContextBuilder implements RestContextBuilder {
     private static ResteasyContextBuilder getRestContextBuilder(org.jboss.resteasy.spi.HttpRequest httpRequest) {
 
         ResteasyContextBuilder resteasyContextBuilder = (ResteasyContextBuilder)
-                httpRequest.getAttribute(BUILDER_ATTRIBUTE_NAME);
+            httpRequest.getAttribute(BUILDER_ATTRIBUTE_NAME);
 
         if (resteasyContextBuilder == null) {
 

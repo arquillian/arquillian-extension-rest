@@ -43,11 +43,11 @@ final class Deployments {
         File[] libs = loadLibraries();
 
         return ShrinkWrap.create(WebArchive.class)
-                .addClasses(StockApplication.class, Stock.class, StockService.class, StockServiceResource.class)
-                .addAsWebInfResource("WEB-INF/web.xml")
-                .addAsWebResource("restclient.jsp")
-                .addAsWebResource("js/jquery-1.8.2.min.js", "js/jquery-1.8.2.min.js")
-                .addAsLibraries(libs);
+            .addClasses(StockApplication.class, Stock.class, StockService.class, StockServiceResource.class)
+            .addAsWebInfResource("WEB-INF/web.xml")
+            .addAsWebResource("restclient.jsp")
+            .addAsWebResource("js/jquery-1.8.2.min.js", "js/jquery-1.8.2.min.js")
+            .addAsLibraries(libs);
     }
 
     /**
@@ -57,10 +57,10 @@ final class Deployments {
      */
     private static File[] loadLibraries() {
         return Maven.resolver()
-                .loadPomFromFile("pom.xml")
-                .resolve("org.easytesting:fest-assert","com.sun.jersey:jersey-json","com.sun.jersey:jersey-client"
-                        ,"com.sun.jersey:jersey-server","com.sun.jersey:jersey-servlet")
-                .withTransitivity()
-                .asFile();
+            .loadPomFromFile("pom.xml")
+            .resolve("org.easytesting:fest-assert", "com.sun.jersey:jersey-json", "com.sun.jersey:jersey-client"
+                , "com.sun.jersey:jersey-server", "com.sun.jersey:jersey-servlet")
+            .withTransitivity()
+            .asFile();
     }
 }

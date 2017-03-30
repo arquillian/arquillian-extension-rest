@@ -87,7 +87,7 @@ public class WarpRestExtension implements LoadableExtension, WarpDeploymentEnric
     public void enrichWebArchive(WebArchive webArchive) {
 
         Collection<WarpRestInterceptorEnricher> enrichers =
-                serviceLoaderInstance.get().all(WarpRestInterceptorEnricher.class);
+            serviceLoaderInstance.get().all(WarpRestInterceptorEnricher.class);
 
         // for each registered enricher
         for (WarpRestInterceptorEnricher enricher : enrichers) {

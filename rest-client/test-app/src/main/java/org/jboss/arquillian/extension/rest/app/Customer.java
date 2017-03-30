@@ -31,48 +31,39 @@ public class Customer implements Serializable {
 
     private String name;
 
-    public Customer()
-    {
+    public Customer() {
     }
 
-    public Customer(String name)
-    {
+    public Customer(String name) {
         this.name = name;
     }
 
-    public Customer(long id, String name)
-    {
+    public Customer(long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Long getId()
-    {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id)
-    {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public boolean isBanned()
-    {
+    public boolean isBanned() {
         return banned;
     }
 
-    public void setBanned(boolean banned)
-    {
+    public void setBanned(boolean banned) {
         this.banned = banned;
     }
 }

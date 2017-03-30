@@ -40,7 +40,8 @@ public class MultivaluedMapImpl<K, V> extends HashMap<K, List<V>> implements Mul
     /**
      * Creates new instance of {@link MultivaluedMapImpl} from specfied map
      *
-     * @param map the map
+     * @param map
+     *     the map
      */
     public MultivaluedMapImpl(MultivaluedMap<K, V> map) {
 
@@ -81,7 +82,8 @@ public class MultivaluedMapImpl<K, V> extends HashMap<K, List<V>> implements Mul
     /**
      * Adds all elements of given map.
      *
-     * @param map the map
+     * @param map
+     *     the map
      */
     private void addAll(MultivaluedMap<K, V> map) {
 
@@ -94,7 +96,8 @@ public class MultivaluedMapImpl<K, V> extends HashMap<K, List<V>> implements Mul
     /**
      * Retrieves the list associated with given key.
      *
-     * @param k the key
+     * @param k
+     *     the key
      *
      * @return the list associated with given key
      */

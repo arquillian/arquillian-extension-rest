@@ -24,7 +24,7 @@ import java.util.Map;
 
 /**
  * The JAX-RS 2.0 specific {@link org.jboss.arquillian.extension.rest.warp.api.RestContext} builder.
- *
+ * <p>
  * <p><strong>Thread-safety:</strong>This class is mutable and not thread safe.</p>
  *
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
@@ -69,9 +69,11 @@ public final class Jaxrs2ContextBuilder implements RestContextBuilder {
     /**
      * Creates new instance of {@link Jaxrs2ContextBuilder} class.
      *
-     * @param executionContext the execution context
+     * @param executionContext
+     *     the execution context
      *
-     * @throws IllegalArgumentException if servlet request is null
+     * @throws IllegalArgumentException
+     *     if servlet request is null
      */
     private Jaxrs2ContextBuilder(ExecutionContext executionContext) {
         Validate.notNull(executionContext, "The 'executionContext' can not be null.");
@@ -83,11 +85,13 @@ public final class Jaxrs2ContextBuilder implements RestContextBuilder {
     /**
      * The utility method that creates new instance of {@link Jaxrs2ContextBuilder}.
      *
-     * @param containerRequestContext the request context
+     * @param containerRequestContext
+     *     the request context
      *
      * @return the created builder instance
      *
-     * @throws IllegalArgumentException if servletRequest is null
+     * @throws IllegalArgumentException
+     *     if servletRequest is null
      */
     public static Jaxrs2ContextBuilder buildContext(ContainerRequestContext containerRequestContext) {
 
@@ -97,11 +101,13 @@ public final class Jaxrs2ContextBuilder implements RestContextBuilder {
     /**
      * The utility method that creates new instance of {@link Jaxrs2ContextBuilder}.
      *
-     * @param interceptorContext the interceptor context
+     * @param interceptorContext
+     *     the interceptor context
      *
      * @return the created builder instance
      *
-     * @throws IllegalArgumentException if servletRequest is null
+     * @throws IllegalArgumentException
+     *     if servletRequest is null
      */
     public static Jaxrs2ContextBuilder buildContext(InterceptorContext interceptorContext) {
 
@@ -111,7 +117,8 @@ public final class Jaxrs2ContextBuilder implements RestContextBuilder {
     /**
      * Sets the container request context.
      *
-     * @param containerRequestContext the container request context
+     * @param containerRequestContext
+     *     the container request context
      *
      * @return the instance of this object
      */
@@ -124,7 +131,8 @@ public final class Jaxrs2ContextBuilder implements RestContextBuilder {
     /**
      * Sets the container response context.
      *
-     * @param containerResponseContext the container request context
+     * @param containerResponseContext
+     *     the container request context
      *
      * @return the instance of this object
      */
@@ -137,7 +145,8 @@ public final class Jaxrs2ContextBuilder implements RestContextBuilder {
     /**
      * Sets the request entity.
      *
-     * @param requestEntity the request entity
+     * @param requestEntity
+     *     the request entity
      */
     public Jaxrs2ContextBuilder setRequestEntity(Object requestEntity) {
 
@@ -148,7 +157,8 @@ public final class Jaxrs2ContextBuilder implements RestContextBuilder {
     /**
      * Sets the response entity.
      *
-     * @param responseEntity the response entity
+     * @param responseEntity
+     *     the response entity
      */
     public Jaxrs2ContextBuilder setResponseEntity(Object responseEntity) {
 
@@ -222,7 +232,8 @@ public final class Jaxrs2ContextBuilder implements RestContextBuilder {
         SecurityContextImpl securityContext = new SecurityContextImpl();
 
         if (containerRequestContext != null && containerRequestContext.getSecurityContext() != null) {
-            securityContext.setAuthenticationScheme(containerRequestContext.getSecurityContext().getAuthenticationScheme());
+            securityContext.setAuthenticationScheme(
+                containerRequestContext.getSecurityContext().getAuthenticationScheme());
             securityContext.setPrincipal(containerRequestContext.getSecurityContext().getUserPrincipal());
         }
 
@@ -232,7 +243,8 @@ public final class Jaxrs2ContextBuilder implements RestContextBuilder {
     /**
      * Retrieves the content type or null if it is not set.
      *
-     * @param mediaType the media type
+     * @param mediaType
+     *     the media type
      *
      * @return the content type/mime name
      */
@@ -244,7 +256,8 @@ public final class Jaxrs2ContextBuilder implements RestContextBuilder {
     /**
      * Maps the http method name into corresponding {@link org.jboss.arquillian.extension.rest.warp.api.HttpMethod}.
      *
-     * @param methodName the http method name
+     * @param methodName
+     *     the http method name
      *
      * @return the {@link org.jboss.arquillian.extension.rest.warp.api.HttpMethod}
      */
@@ -256,7 +269,8 @@ public final class Jaxrs2ContextBuilder implements RestContextBuilder {
     /**
      * Returns list of http headers values.
      *
-     * @param values the list of values
+     * @param values
+     *     the list of values
      *
      * @return the list of values
      */
@@ -272,14 +286,15 @@ public final class Jaxrs2ContextBuilder implements RestContextBuilder {
     /**
      * Retrieves the builder from the request.
      *
-     * @param executionContext the execution context
+     * @param executionContext
+     *     the execution context
      *
      * @return the {@link Jaxrs2ContextBuilder} instance
      */
     private static Jaxrs2ContextBuilder getJaxrsContextBuilder(ExecutionContext executionContext) {
 
         Jaxrs2ContextBuilder jaxrsContextBuilder = (Jaxrs2ContextBuilder)
-                executionContext.getProperty(BUILDER_ATTRIBUTE_NAME);
+            executionContext.getProperty(BUILDER_ATTRIBUTE_NAME);
 
         if (jaxrsContextBuilder == null) {
 
@@ -300,7 +315,7 @@ public final class Jaxrs2ContextBuilder implements RestContextBuilder {
     private RestContextImpl getRestContext() {
 
         RestContextImpl restContext = (RestContextImpl)
-                executionContext.getProperty(WarpRestCommons.WARP_REST_ATTRIBUTE);
+            executionContext.getProperty(WarpRestCommons.WARP_REST_ATTRIBUTE);
 
         if (restContext == null) {
 

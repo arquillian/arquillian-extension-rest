@@ -36,31 +36,30 @@ public class CustomerResourceImpl implements CustomerResource {
     private HttpServletRequest httpServletRequest;
 
     @Override
-    public List<Customer> getAllCustomers()
-    {
+    public List<Customer> getAllCustomers() {
         return findAllCustomers();
     }
 
     /**
-     * This method responds to a GET request that supports the content type application/xml or application/json and returns the
+     * This method responds to a GET request that supports the content type application/xml or application/json and
+     * returns the
      * requested customer resource.
      * <p/>
      * <p>
-     * The customer is retrieved by id. A representation of the customer is then written into the response in the requested
+     * The customer is retrieved by id. A representation of the customer is then written into the response in the
+     * requested
      * format. The id value is taken from the final path segment.
      * </p>
      * <p/>
      * <a class="citation" href= "javacode://com.acme.jaxrs.CustomerResource#getCustomerById(java.lang.String)" />
      */
     @Override
-    public Customer getCustomerById(@PathParam("id") long id)
-    {
+    public Customer getCustomerById(@PathParam("id") long id) {
         return findCustomerById(id);
     }
 
     @Override
-    public Customer banCustomer(long id)
-    {
+    public Customer banCustomer(long id) {
         final Customer customer = findCustomerById(id);
         if (null == customer) {
             return null;
@@ -70,14 +69,12 @@ public class CustomerResourceImpl implements CustomerResource {
     }
 
     @Override
-    public Customer createCustomer(Customer customer)
-    {
+    public Customer createCustomer(Customer customer) {
         customer.setId(nextId());
         return customer;
     }
 
-    private List<Customer> findAllCustomers()
-    {
+    private List<Customer> findAllCustomers() {
         final Object attribute = httpServletRequest.getAttribute(CUSTOMERS_ATTRIBUTE_NAME);
         List<Customer> customers;
         if (!(attribute instanceof List)) {
@@ -92,8 +89,7 @@ public class CustomerResourceImpl implements CustomerResource {
         return customers;
     }
 
-    private Customer findCustomerById(long id)
-    {
+    private Customer findCustomerById(long id) {
         for (Customer customer : findAllCustomers()) {
             if (id == customer.getId()) {
                 return customer;
@@ -102,8 +98,7 @@ public class CustomerResourceImpl implements CustomerResource {
         return null;
     }
 
-    private long nextId()
-    {
+    private long nextId() {
         final Object attribute = httpServletRequest.getAttribute(CUSTOMER_ID_SEQUENCE_ATTRIBUTE_NAME);
         long newValue;
         if (attribute instanceof Long) {
