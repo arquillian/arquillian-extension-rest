@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.jboss</groupId>
     <artifactId>jboss-parent</artifactId>
-    <version>22</version>
+    <version>25</version>
     <relativePath/>
   </parent>
 
@@ -47,7 +47,7 @@
 
   <properties>
     <!-- Arquillian -->
-    <version.arquillian_core>1.1.13.Final</version.arquillian_core>
+    <version.arquillian_core>1.2.0.Final</version.arquillian_core>
     <version.arquillian_drone>1.1.0.Final</version.arquillian_drone>
     <version.arquillian_warp>1.0.0.Alpha4</version.arquillian_warp>
 
