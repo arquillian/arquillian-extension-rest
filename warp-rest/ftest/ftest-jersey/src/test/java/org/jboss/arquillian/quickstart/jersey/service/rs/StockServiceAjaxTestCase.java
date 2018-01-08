@@ -50,6 +50,7 @@ import static org.jboss.arquillian.warp.client.filter.http.HttpFilters.request;
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */
 @WarpTest
+@RunAsClient
 @RunWith(Arquillian.class)
 public class StockServiceAjaxTestCase {
 

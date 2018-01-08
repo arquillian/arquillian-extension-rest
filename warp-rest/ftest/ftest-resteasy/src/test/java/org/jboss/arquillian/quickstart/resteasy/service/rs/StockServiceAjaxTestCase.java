@@ -32,6 +32,7 @@ import org.jboss.arquillian.extension.rest.warp.api.HttpMethod;
 import org.jboss.arquillian.extension.rest.warp.api.RestContext;
 import org.jboss.arquillian.warp.servlet.AfterServlet;
 import org.jboss.shrinkwrap.api.Archive;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -50,6 +51,7 @@ import static org.jboss.arquillian.warp.client.filter.http.HttpFilters.request;
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */
 @WarpTest
+@RunAsClient
 @RunWith(Arquillian.class)
 public class StockServiceAjaxTestCase {
 

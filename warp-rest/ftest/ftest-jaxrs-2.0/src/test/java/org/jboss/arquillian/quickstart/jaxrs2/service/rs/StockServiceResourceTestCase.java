@@ -62,6 +62,7 @@ import static org.junit.Assert.assertNotNull;
  * @author <a href="mailto:jmnarloch@gmail.com">Jakub Narloch</a>
  */
 @WarpTest
+@RunAsClient
 @RunWith(Arquillian.class)
 public class StockServiceResourceTestCase {
 
