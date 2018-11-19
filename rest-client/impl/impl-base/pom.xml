@@ -11,7 +11,7 @@
   <artifactId>arquillian-rest-client-impl-base</artifactId>
   <name>Arquillian REST Client Extension: Implementation base</name>
   <properties>
-    <version.resteasy>2.3.2.Final</version.resteasy>
+    <version.resteasy>3.6.2.Final</version.resteasy>
   </properties>
   <dependencies>
     <dependency>

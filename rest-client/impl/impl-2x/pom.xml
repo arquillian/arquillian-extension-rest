@@ -14,7 +14,7 @@
   <properties>
     <jboss.version>7.1.1.Final</jboss.version>
     <version.org.jboss.jbossas>7.1.1.Final</version.org.jboss.jbossas>
-    <version.resteasy>2.3.2.Final</version.resteasy>
+    <version.resteasy>3.6.2.Final</version.resteasy>
   </properties>
   <dependencies>
     <dependency>
