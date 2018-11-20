@@ -373,7 +373,7 @@
     <jboss.version>7.1.1.Final</jboss.version>
     <version.jersey>2.6</version.jersey>
     <version.jersey.providers>2.3.0</version.jersey.providers>
-    <version.org.jboss.jbossas>7.1.1.Final</version.org.jboss.jbossas>
+    <version.org.jboss.jbossas>7.2.0.Final</version.org.jboss.jbossas>
     <version.resteasy>3.0.1.Final</version.resteasy>
   </properties>
 </project>
