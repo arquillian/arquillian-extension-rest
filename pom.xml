@@ -47,7 +47,7 @@
 
   <properties>
     <!-- Arquillian -->
-    <version.arquillian_core>1.2.0.Final</version.arquillian_core>
+    <version.arquillian_core>1.4.1.Final</version.arquillian_core>
     <version.arquillian_drone>1.1.0.Final</version.arquillian_drone>
     <version.arquillian_warp>1.0.0.Alpha4</version.arquillian_warp>
 
