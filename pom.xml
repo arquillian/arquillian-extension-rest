@@ -49,7 +49,7 @@
     <!-- Arquillian -->
     <version.arquillian_core>1.4.1.Final</version.arquillian_core>
     <version.arquillian_drone>1.1.0.Final</version.arquillian_drone>
-    <version.arquillian_warp>1.0.0.Alpha4</version.arquillian_warp>
+    <version.arquillian_warp>1.0.0</version.arquillian_warp>
 
     <!-- JAX-RS implementations -->
     <version.resteasy_jax_rs_1_0>2.3.2.Final</version.resteasy_jax_rs_1_0>
