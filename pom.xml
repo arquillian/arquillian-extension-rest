@@ -55,7 +55,7 @@
     <version.resteasy_jax_rs_1_0>2.3.2.Final</version.resteasy_jax_rs_1_0>
     <version.resteasy_jax_rs_2_0>3.0.4.Final</version.resteasy_jax_rs_2_0>
     <version.jersey>1.17</version.jersey>
-    <version.cxf>2.7.2</version.cxf>
+    <version.cxf>3.3.0</version.cxf>
     <version.springframework>3.2.1.RELEASE</version.springframework>
 
     <!-- Tests -->
