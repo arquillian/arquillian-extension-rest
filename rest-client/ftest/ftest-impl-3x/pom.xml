@@ -11,7 +11,7 @@
   <artifactId>arquillian-rest-client-impl-3x-ftest</artifactId>
   <name>Arquillian REST Client Extension: Impl-3x Functional Tests</name>
   <properties>
-    <version.resteasy>3.0.11.Final</version.resteasy>
+    <version.resteasy>3.6.2.Final</version.resteasy>
     <version.wildfly>9.0.2.Final</version.wildfly>
     <arquillian.wildfly.version>1.1.0.Final</arquillian.wildfly.version>
   </properties>
