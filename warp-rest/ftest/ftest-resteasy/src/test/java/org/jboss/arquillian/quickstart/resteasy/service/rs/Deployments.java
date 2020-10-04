@@ -23,12 +23,15 @@ final class Deployments {
      *
      * @return the test deployment
      */
-    public static WebArchive createDeployment(String name) {
+    public static Archive createDeployment() {
         File[] libs = loadLibraries();
 
-        return ShrinkWrap.create(WebArchive.class, name + ".war")
+        return ShrinkWrap.create(WebArchive.class)
             .addClasses(StockApplication.class, Stock.class, StockService.class, StockServiceResource.class)
+            .addAsWebInfResource("WEB-INF/web.xml")
             .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
+            .addAsWebResource("restclient.jsp")
+            .addAsWebResource("js/jquery-1.8.2.min.js", "js/jquery-1.8.2.min.js")
             .addAsLibraries(libs);
     }
 
@@ -38,6 +41,8 @@ final class Deployments {
      * @return the loaded dependencies
      */
     private static File[] loadLibraries() {
-        return Maven.resolver().resolve("org.easytesting:fest-assert:1.4", "org.jboss.resteasy:resteasy-jaxrs:3.6.3.Final").withTransitivity().asFile();
+        return Maven.resolver().resolve("org.jboss.resteasy:resteasy-jaxrs:3.6.3.Final",
+            "org.jboss.resteasy:resteasy-jaxb-provider:3.6.3.Final",
+            "org.easytesting:fest-assert:1.4").withTransitivity().asFile();
     }
 }

@@ -3,16 +3,29 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
   <listener>
-    <listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
+    <listener-class>
+      org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+    </listener-class>
   </listener>
 
   <servlet>
-    <servlet-name>RESTEasy JSAPI</servlet-name>
-    <servlet-class>org.jboss.resteasy.jsapi.JSAPIServlet</servlet-class>
+    <servlet-name>Resteasy</servlet-name>
+    <servlet-class>
+      org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+    </servlet-class>
+    <init-param>
+      <param-name>javax.ws.rs.Application</param-name>
+      <param-value>org.jboss.arquillian.quickstart.resteasy.application.StockApplication</param-value>
+    </init-param>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>RESTEasy JSAPI</servlet-name>
-    <url-pattern>/rest-js</url-pattern>
+    <servlet-name>Resteasy</servlet-name>
+    <url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
+
+  <context-param>
+    <param-name>resteasy.servlet.mapping.prefix</param-name>
+    <param-value>/rest/</param-value>
+  </context-param>
 </web-app>

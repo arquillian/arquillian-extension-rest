@@ -19,7 +19,7 @@ package org.jboss.arquillian.extension.rest.warp.impl.resteasy.integration;
 
 import org.jboss.arquillian.extension.rest.warp.api.RestContext;
 import org.jboss.resteasy.annotations.interception.ServerInterceptor;
-import org.jboss.resteasy.core.ResourceMethod;
+import org.jboss.resteasy.core.ResourceMethodInvoker;
 import org.jboss.resteasy.core.ServerResponse;
 import org.jboss.resteasy.spi.Failure;
 import org.jboss.resteasy.spi.HttpRequest;
@@ -82,7 +82,7 @@ public class WarpResteasyInterceptor implements PreProcessInterceptor, PostProce
      * {@inheritDoc}
      */
     @Override
-    public ServerResponse preProcess(HttpRequest httpRequest, ResourceMethod resourceMethod)
+    public ServerResponse preProcess(HttpRequest httpRequest, ResourceMethodInvoker resourceMethod)
         throws Failure, WebApplicationException {
 
         // stores the http request

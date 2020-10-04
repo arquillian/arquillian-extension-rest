@@ -58,9 +58,9 @@
     </dependency>
 
     <dependency>
-      <groupId>org.jboss.spec</groupId>
-      <artifactId>jboss-javaee-web-6.0</artifactId>
-      <type>pom</type>
+      <groupId>javax</groupId>
+      <artifactId>javaee-web-api</artifactId>
+      <version>7.0</version>
       <scope>provided</scope>
     </dependency>
 
@@ -104,4 +104,3 @@
   </dependencies>
 
 </project>
-

@@ -17,8 +17,13 @@
  */
 package org.jboss.arquillian.quickstart.resteasy.application;
 
+import org.jboss.arquillian.extension.rest.warp.impl.resteasy.integration.WarpResteasyInterceptor;
+import org.jboss.arquillian.quickstart.resteasy.service.rs.StockServiceResource;
+
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
+import java.util.Collections;
+import java.util.Set;
 
 /**
  * The stock application.
@@ -28,4 +33,15 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("/rest")
 public class StockApplication extends Application {
 
+    @Override
+    public Set<Class<?>> getClasses() {
+        // TODO the WARP interceptor needs to be added explicitly, due to the fact
+        // that this deployment uses explicit dispatcher servlet
+        return Collections.<Class<?>>singleton(WarpResteasyInterceptor.class);
+    }
+
+    @Override
+    public Set<Object> getSingletons() {
+        return Collections.<Object>singleton(new StockServiceResource());
+    }
 }
