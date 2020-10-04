@@ -13,7 +13,7 @@
 
   <container qualifier="jbossas-managed" default="true">
     <configuration>
-      <property name="jbossHome">target/jboss-as-7.1.1.Final</property>
+      <property name="jbossHome">target/wildfly-${wildfly.version:16.0.0.Final}</property>
       <property name="outputToConsole">true</property>
     </configuration>
   </container>

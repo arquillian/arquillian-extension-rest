@@ -5,6 +5,7 @@ import org.jboss.arquillian.quickstart.resteasy.model.Stock;
 import org.jboss.arquillian.quickstart.resteasy.service.StockService;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 
@@ -22,14 +23,12 @@ final class Deployments {
      *
      * @return the test deployment
      */
-    public static Archive createDeployment() {
+    public static WebArchive createDeployment(String name) {
         File[] libs = loadLibraries();
 
-        return ShrinkWrap.create(WebArchive.class)
+        return ShrinkWrap.create(WebArchive.class, name + ".war")
             .addClasses(StockApplication.class, Stock.class, StockService.class, StockServiceResource.class)
-            .addAsWebInfResource("WEB-INF/web.xml")
-            .addAsWebResource("restclient.jsp")
-            .addAsWebResource("js/jquery-1.8.2.min.js", "js/jquery-1.8.2.min.js")
+            .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
             .addAsLibraries(libs);
     }
 
@@ -39,6 +38,6 @@ final class Deployments {
      * @return the loaded dependencies
      */
     private static File[] loadLibraries() {
-        return Maven.resolver().resolve("org.easytesting:fest-assert:1.4").withTransitivity().asFile();
+        return Maven.resolver().resolve("org.easytesting:fest-assert:1.4", "org.jboss.resteasy:resteasy-jaxrs:3.6.3.Final").withTransitivity().asFile();
     }
 }

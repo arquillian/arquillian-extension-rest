@@ -4,7 +4,7 @@
 
   <container qualifier="jbossas7" default="true">
     <configuration>
-      <property name="jbossHome">target/jboss-as-${jboss.version:7.1.1.Final}</property>
+      <property name="jbossHome">target/wildfly-${jboss.version:16.0.0.Final}</property>
     </configuration>
   </container>
 
