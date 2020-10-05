@@ -129,7 +129,7 @@
   </dependencies>
   <properties>
     <wildfly.version>16.0.0.Final</wildfly.version>
-    <version.org.jboss.jbossas>2.1.1.Final</version.org.jboss.jbossas>
+    <version.org.jboss.jbossas>2.2.0.Final</version.org.jboss.jbossas>
     <version.resteasy>2.3.2.Final</version.resteasy>
   </properties>
 </project>
