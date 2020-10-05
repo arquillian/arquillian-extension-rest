@@ -47,12 +47,12 @@
 
   <properties>
     <!-- Arquillian -->
-    <version.arquillian_core>1.4.1.Final</version.arquillian_core>
+    <version.arquillian_core>1.6.0.Final</version.arquillian_core>
     <version.arquillian_drone>1.1.0.Final</version.arquillian_drone>
-    <version.arquillian_warp>1.0.0.Alpha4</version.arquillian_warp>
+    <version.arquillian_warp>1.0.0</version.arquillian_warp>
 
     <!-- JAX-RS implementations -->
-    <version.resteasy_jax_rs_1_0>2.3.2.Final</version.resteasy_jax_rs_1_0>
+    <version.resteasy_jax_rs_1_0>3.6.3.Final</version.resteasy_jax_rs_1_0>
     <version.resteasy_jax_rs_2_0>3.0.4.Final</version.resteasy_jax_rs_2_0>
     <version.jersey>1.17</version.jersey>
     <version.cxf>2.7.2</version.cxf>
@@ -64,12 +64,12 @@
     <version.fest.assert>1.4</version.fest.assert>
     <version.shrinkwrap.resolvers>2.2.6</version.shrinkwrap.resolvers>
     <version.jboss_spec>3.0.0.Final</version.jboss_spec>
-    <version.org.jboss.jbossas>7.1.1.Final</version.org.jboss.jbossas>
+    <version.org.jboss.jbossas>2.1.1.Final</version.org.jboss.jbossas>
     <version.org.glassfish>3.1.2</version.org.glassfish>
 
     <!-- override from parent -->
-    <maven.compiler.target>1.5</maven.compiler.target>
-    <maven.compiler.source>1.5</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
     <tomcat.version>7.0.42</tomcat.version>
   </properties>
 
@@ -238,14 +238,14 @@
 
       <!-- Containers -->
       <dependency>
-        <groupId>org.jboss.as</groupId>
-        <artifactId>jboss-as-arquillian-container-managed</artifactId>
+        <groupId>org.wildfly.arquillian</groupId>
+        <artifactId>wildfly-arquillian-container-managed</artifactId>
         <version>${version.org.jboss.jbossas}</version>
       </dependency>
 
       <dependency>
-        <groupId>org.jboss.as</groupId>
-        <artifactId>jboss-as-arquillian-container-remote</artifactId>
+        <groupId>org.wildfly.arquillian</groupId>
+        <artifactId>wildfly-arquillian-container-remote</artifactId>
         <version>${version.org.jboss.jbossas}</version>
       </dependency>
 

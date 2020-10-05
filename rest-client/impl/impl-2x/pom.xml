@@ -13,7 +13,7 @@
   <description>Integrates RestEasy Client version 2.x with Arquillian</description>
   <properties>
     <jboss.version>7.1.1.Final</jboss.version>
-    <version.org.jboss.jbossas>7.1.1.Final</version.org.jboss.jbossas>
+    <version.org.jboss.jbossas>2.1.1.Final</version.org.jboss.jbossas>
     <version.resteasy>2.3.2.Final</version.resteasy>
   </properties>
   <dependencies>
@@ -97,7 +97,7 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
               <systemProperties>
-                <jboss.version>${version.org.jboss.jbossas}</jboss.version>
+                <jboss.version>16.0.0.Final</jboss.version>
               </systemProperties>
             </configuration>
           </plugin>
@@ -111,12 +111,12 @@
                 <configuration>
                   <artifactItems>
                     <artifactItem>
-                      <artifactId>jboss-as-dist</artifactId>
-                      <groupId>org.jboss.as</groupId>
+                      <artifactId>wildfly-dist</artifactId>
+                      <groupId>org.wildfly</groupId>
                       <outputDirectory>${project.build.directory}/</outputDirectory>
                       <overWrite>false</overWrite>
                       <type>zip</type>
-                      <version>${version.org.jboss.jbossas}</version>
+                      <version>16.0.0.Final</version>
                     </artifactItem>
                   </artifactItems>
                 </configuration>
@@ -130,8 +130,8 @@
       </build>
       <dependencies>
         <dependency>
-          <groupId>org.jboss.as</groupId>
-          <artifactId>jboss-as-arquillian-container-managed</artifactId>
+          <groupId>org.wildfly.arquillian</groupId>
+          <artifactId>wildfly-arquillian-container-managed</artifactId>
           <version>${version.org.jboss.jbossas}</version>
           <scope>test</scope>
         </dependency>
@@ -141,8 +141,8 @@
       <id>arq-jbossas-remote-7</id>
       <dependencies>
         <dependency>
-          <groupId>org.jboss.as</groupId>
-          <artifactId>jboss-as-arquillian-container-remote</artifactId>
+          <groupId>org.wildfly.arquillian</groupId>
+          <artifactId>wildfly-arquillian-container-remote</artifactId>
           <version>${version.org.jboss.jbossas}</version>
           <scope>test</scope>
         </dependency>
