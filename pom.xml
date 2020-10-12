@@ -59,7 +59,7 @@
     <version.springframework>3.2.1.RELEASE</version.springframework>
 
     <!-- Tests -->
-    <version.junit>4.12</version.junit>
+    <version.junit>4.13.1</version.junit>
     <version.mockito>1.10.19</version.mockito>
     <version.fest.assert>1.4</version.fest.assert>
     <version.shrinkwrap.resolvers>2.2.6</version.shrinkwrap.resolvers>
