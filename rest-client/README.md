@@ -103,7 +103,7 @@ The objects we're passing (i.e. Customer) are being marshaled by JAXB, Jackson, 
      * @param webTarget configured resource ready for use, injected by Arquillian
      */
     @Test
-    public void createPackageBareRsource(@ArquillianResteasyResource("rest/customer") ResteasyWebTarget webTarget)
+    public void createPackageBareResource(@ArquillianResteasyResource("rest/customer") ResteasyWebTarget webTarget)
     {
         //        Given
         final Invocation.Builder invocationBuilder = webTarget.request();
