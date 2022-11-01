@@ -111,13 +111,13 @@
         <dependency>
           <groupId>org.apache.tomcat.embed</groupId>
           <artifactId>tomcat-embed-core</artifactId>
-          <version>7.0.19</version>
+          <version>8.5.2</version>
           <scope>provided</scope>
         </dependency>
         <dependency>
           <groupId>org.apache.tomcat.embed</groupId>
           <artifactId>tomcat-embed-jasper</artifactId>
-          <version>7.0.19</version>
+          <version>8.5.2</version>
           <scope>provided</scope>
         </dependency>
         <dependency>
