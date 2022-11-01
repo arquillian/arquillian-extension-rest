@@ -62,7 +62,7 @@
     <version.junit>4.12</version.junit>
     <version.mockito>1.10.19</version.mockito>
     <version.fest.assert>1.4</version.fest.assert>
-    <version.shrinkwrap.resolvers>2.2.6</version.shrinkwrap.resolvers>
+    <version.shrinkwrap.resolvers>3.1.4</version.shrinkwrap.resolvers>
     <version.jboss_spec>3.0.0.Final</version.jboss_spec>
     <version.org.jboss.jbossas>2.1.1.Final</version.org.jboss.jbossas>
     <version.org.glassfish>3.1.2</version.org.glassfish>
